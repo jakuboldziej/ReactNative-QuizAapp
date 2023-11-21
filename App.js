@@ -1,15 +1,16 @@
 import React from "react"
-import Tabs from "./src/components/Tabs"
+import Stacks from "./src/components/Stacks"
 import { NavigationContainer } from "@react-navigation/native"
-import { SafeAreaView, StatusBar } from "react-native"
+import { SafeAreaProvider } from "react-native-safe-area-context"
 
 function App() {
+
   return (
-    <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight,}}>
+    <SafeAreaProvider>
       <NavigationContainer>
-        <Tabs />      
+        <Stacks />
       </NavigationContainer>
-    </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
 

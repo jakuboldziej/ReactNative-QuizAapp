@@ -1,22 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { View, Text, Button } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 
-function Game({ navigation }) {
-
+function GameMenu({ navigation }) {
   const insets = useSafeAreaInsets();
   const { container } = styles(insets);
   return (
     <View style={container}>
-      <Text>gameplay</Text>
-      <View>
-        <Button title="Exit" onPress={() => navigation.goBack()} />
-      </View>
+      <Text>Game Menu Area</Text>
+      <Button title="Play" onPress={() => navigation.navigate("Game")} />
     </View>
-  )
+  );
 }
+
 export const styles = (insets) =>
   StyleSheet.create({
     container: {
@@ -25,4 +22,4 @@ export const styles = (insets) =>
     },
 });
 
-export default Game
+export default GameMenu;
