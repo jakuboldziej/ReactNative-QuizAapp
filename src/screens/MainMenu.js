@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import { Text, View, ScrollView, Button, StyleSheet } from 'react-native';
-import { useSafeAreaInsets, useSafeAreaFrame } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 function MainMenu() {
@@ -18,11 +18,10 @@ function MainMenu() {
   });
   
   const insets = useSafeAreaInsets();
-  const { container, scrollView, buttons } = styles(insets)
   return (
-    <View style={container}>
-      <ScrollView contentContainerStyle={scrollView}>
-        <View style={buttons}>
+    <View style={styles(insets).container}>
+      <ScrollView contentContainerStyle={styles(insets).scrollView}>
+        <View style={styles(insets).buttons}>
           <Button title='+' color="#f194ff" onPress={() => setStatyw(statyw + 1)}/>
           <Button title='-' color="#f194ff" onPress={() => setStatyw(statyw - 1)}/>
           <Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text>
@@ -39,7 +38,7 @@ export const styles = (insets) => StyleSheet.create({
   },
   scrollView: {
     backgroundColor: '#67595E',
-    padding: 5,
+    padding: 10,
   },
   buttons: {
     flexDirection: 'column',

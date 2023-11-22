@@ -5,11 +5,13 @@ import { StyleSheet, View, Text, Button } from "react-native";
 
 function GameMenu({ navigation }) {
   const insets = useSafeAreaInsets();
-  const { container } = styles(insets);
   return (
-    <View style={container}>
+    <View style={styles(insets).container}>
       <Text>Game Menu Area</Text>
-      <Button title="Play" onPress={() => navigation.navigate("Game")} />
+      <View style={styles(insets).buttons}>
+        <Button title="Quick Play" onPress={() => navigation.navigate("Game")} />
+        <Button title="Categories" onPress={() => navigation.navigate("GameCategories")} />
+      </View>
     </View>
   );
 }
@@ -18,12 +20,14 @@ export const styles = (insets) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'flex-end',
       marginTop: insets.top,
+      alignItems: 'center',
       padding: 10,
       backgroundColor: '#E8B4B8',
-      height: safeArea().height,
     },
+    buttons: {
+      gap: 5,
+    }
 });
 
 export default GameMenu;

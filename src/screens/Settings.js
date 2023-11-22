@@ -7,9 +7,8 @@ import { StyleSheet } from "react-native";
 function Settings({navigation}) {
 
   const insets = useSafeAreaInsets();
-  const { container } = styles(insets)
   return (
-    <View style={container}>
+    <View style={styles(insets).container}>
         <Text>Settings</Text>
         <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
     </View>
@@ -17,6 +16,8 @@ function Settings({navigation}) {
 }
 export const styles = (insets) => StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: "#E8B4B8",
     marginTop: insets.top,
     padding: 10,
   },

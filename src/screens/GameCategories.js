@@ -1,16 +1,21 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { View, Text, Button } from "react-native"
-import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 
-function Game({ navigation }) {
+function GameCategories({ navigation }) {
 
   const insets = useSafeAreaInsets();
   return (
     <View style={styles(insets).container}>
-      <Text>gameplay</Text>
+      <Text>Categories</Text>
       <View style={styles(insets).buttons}>
+        <Button title="Exit" onPress={() => navigation.goBack()} />
+        <Button title="Exit" onPress={() => navigation.goBack()} />
+        <Button title="Exit" onPress={() => navigation.goBack()} />
+        <Button title="Exit" onPress={() => navigation.goBack()} />
+        <Button title="Exit" onPress={() => navigation.goBack()} />
         <Button title="Exit" onPress={() => navigation.goBack()} />
       </View>
     </View>
@@ -22,11 +27,11 @@ export const styles = (insets) =>
       alignItems: 'center',
       marginTop: insets.top,
       padding: 10,
-      gap: 5,
     },
     buttons: {
-      width: safeArea().width - 20
+      gap: 5,
+      width: 100,
     }
 });
 
-export default Game
+export default GameCategories

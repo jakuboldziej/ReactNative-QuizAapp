@@ -13,18 +13,18 @@ function Profile({navigation}) {
   }, [])
 
   const insets = useSafeAreaInsets();
-  const { container } = styles(insets);
   return (
-    <View style={container}>
+    <View style={styles(insets).container}>
       <Text>{nick}</Text>
       <TextInput style={{
             padding: 10,
             borderColor: 'red',
             borderWidth: 1,
+            borderRadius: 50,
           }}
           onChangeText={setInputValue}
           value={inputValue}
-          placeholder={'Please type here…'}/>
+          placeholder={'Change your name...'}/>
         <Button title="Save" onPress={() => {alert("Changed: " + inputValue); navigation.goBack()}} />
     </View>
   )
