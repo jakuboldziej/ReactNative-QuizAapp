@@ -2,18 +2,18 @@ import React from "react"
 import GameMenu from "../screens/GameMenu"
 import MainMenu from "../screens/MainMenu"
 import Settings from "../screens/Settings"
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 const Tab = createMaterialBottomTabNavigator()
 
 function Tabs() {
   return (
-    <Tab.Navigator initialRouteName="MainMenu" activeColor="#e91e63" barStyle={{backgroundColor: "#d4a373", height: 80}}>
+    <Tab.Navigator initialRouteName="MainMenu" activeColor="#e91e63" barStyle={{backgroundColor: "#A49393", height: 80}}>
       <Tab.Screen name={'Play'} component={GameMenu} options={{
         tabBarLabel: 'Play',
         tabBarIcon: ({focused}) => (
-          <MaterialIcons name={'layers'} size={25} color={focused ? '#e91e63' : 'black'}/>
+          <MaterialCommunityIcons name={focused ? 'layers' : 'layers-outline'} size={25} color={focused ? '#e91e63' : 'black'}/>
         )
       }}/>
       <Tab.Screen name={'MainMenu'} component={MainMenu} options={{

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context";
 import { StyleSheet, View, Text, Button } from "react-native";
 
 function GameMenu({ navigation }) {
@@ -17,8 +17,12 @@ function GameMenu({ navigation }) {
 export const styles = (insets) =>
   StyleSheet.create({
     container: {
+      flex: 1,
+      justifyContent: 'flex-end',
       marginTop: insets.top,
       padding: 10,
+      backgroundColor: '#E8B4B8',
+      height: safeArea().height,
     },
 });
 

@@ -1,7 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
-import { Text, View, ScrollView, Button, Alert, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, Button, StyleSheet } from 'react-native';
 import { useSafeAreaInsets, useSafeAreaFrame } from 'react-native-safe-area-context';
+
 
 function MainMenu() {
   const [statyw, setStatyw] = useState(0);
@@ -20,10 +21,12 @@ function MainMenu() {
   const { container, scrollView, buttons } = styles(insets)
   return (
     <View style={container}>
-      <ScrollView style={scrollView}>
+      <ScrollView contentContainerStyle={scrollView}>
         <View style={buttons}>
-          <Button title="asd" color="#f194ff" onPress={() => Alert.alert("elo","asdf", [{text: 'elo'},{text: 'Cancel'}])}/>
-          <Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text>
+          <Button title='+' color="#f194ff" onPress={() => setStatyw(statyw + 1)}/>
+          <Button title='-' color="#f194ff" onPress={() => setStatyw(statyw - 1)}/>
+          <Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text>
+          <Text>Bottom</Text>
         </View>
       </ScrollView>
     </View>
@@ -33,15 +36,14 @@ export const styles = (insets) => StyleSheet.create({
   container: {
     flex: 1,
     marginTop: insets.top,
-    padding: 10,
-    height: useSafeAreaFrame().height,
   },
   scrollView: {
-    backgroundColor: '#606c38',
+    backgroundColor: '#67595E',
+    padding: 5,
   },
   buttons: {
     flexDirection: 'column',
-    width: 45,
+    width: 100,
     gap: 5
   }
 })
