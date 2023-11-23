@@ -8,7 +8,7 @@ function GameMenu({ navigation }) {
   const style = styles(insets);
   return (
     <View style={style.container}>
-      <Text>Game Menu Area</Text>
+      <Text style={{fontSize: 25}}>Game Menu Area</Text>
       <View style={style.buttons}>
         <Button title="Quick Play" onPress={() => navigation.navigate("Game")} />
         <Button title="Categories" onPress={() => navigation.navigate("GameCategories")} />
@@ -24,10 +24,11 @@ export const styles = (insets) =>
       marginTop: insets.top,
       alignItems: 'center',
       padding: 10,
-      backgroundColor: '#E8B4B8',
+      backgroundColor: '#67595E',
     },
     buttons: {
       gap: 5,
+      
     }
 });
 

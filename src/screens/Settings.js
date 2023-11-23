@@ -10,7 +10,7 @@ function Settings({navigation}) {
   const style = styles(insets);
   return (
     <View style={style.container}>
-        <Text>Settings</Text>
+        <Text style={style.defaultFontSize}>Settings</Text>
         <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
     </View>
   )
@@ -18,9 +18,12 @@ function Settings({navigation}) {
 export const styles = (insets) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E8B4B8",
+    backgroundColor: "#67595E",
     marginTop: insets.top,
     padding: 10,
   },
+  defaultFontSize: {
+    fontSize: 25,
+  }
 })
 export default Settings

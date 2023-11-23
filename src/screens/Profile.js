@@ -15,7 +15,7 @@ function Profile({navigation}) {
   const insets = useSafeAreaInsets();
   const style = styles(insets);
   return (
-    <View style={styles.container}>
+    <View style={style.container}>
       <Text>{nick}</Text>
       <TextInput style={{
             padding: 10,
