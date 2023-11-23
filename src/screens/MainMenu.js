@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Text, View, ScrollView, Button, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-
 function MainMenu() {
   const [statyw, setStatyw] = useState(0);
   
@@ -18,10 +17,11 @@ function MainMenu() {
   });
   
   const insets = useSafeAreaInsets();
+  const style = styles(insets);
   return (
-    <View style={styles(insets).container}>
-      <ScrollView contentContainerStyle={styles(insets).scrollView}>
-        <View style={styles(insets).buttons}>
+    <View style={style.container}>
+      <ScrollView contentContainerStyle={style.scrollView}>
+        <View style={style.buttons}>
           <Button title='+' color="#f194ff" onPress={() => setStatyw(statyw + 1)}/>
           <Button title='-' color="#f194ff" onPress={() => setStatyw(statyw - 1)}/>
           <Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text>

@@ -7,8 +7,9 @@ import { StyleSheet } from "react-native";
 function Settings({navigation}) {
 
   const insets = useSafeAreaInsets();
+  const style = styles(insets);
   return (
-    <View style={styles(insets).container}>
+    <View style={style.container}>
         <Text>Settings</Text>
         <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
     </View>

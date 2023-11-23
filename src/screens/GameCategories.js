@@ -7,10 +7,11 @@ import { StyleSheet } from "react-native";
 function GameCategories({ navigation }) {
 
   const insets = useSafeAreaInsets();
+  const style = styles(insets);
   return (
-    <View style={styles(insets).container}>
+    <View style={style.container}>
       <Text>Categories</Text>
-      <View style={styles(insets).buttons}>
+      <View style={style.buttons}>
         <Button title="Exit" onPress={() => navigation.goBack()} />
         <Button title="Exit" onPress={() => navigation.goBack()} />
         <Button title="Exit" onPress={() => navigation.goBack()} />

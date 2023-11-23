@@ -5,10 +5,11 @@ import { StyleSheet, View, Text, Button } from "react-native";
 
 function GameMenu({ navigation }) {
   const insets = useSafeAreaInsets();
+  const style = styles(insets);
   return (
-    <View style={styles(insets).container}>
+    <View style={style.container}>
       <Text>Game Menu Area</Text>
-      <View style={styles(insets).buttons}>
+      <View style={style.buttons}>
         <Button title="Quick Play" onPress={() => navigation.navigate("Game")} />
         <Button title="Categories" onPress={() => navigation.navigate("GameCategories")} />
       </View>
