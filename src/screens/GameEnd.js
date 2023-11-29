@@ -29,6 +29,7 @@ const styles = (insets) =>
       alignItems: 'center',
       padding: 10,
       gap: 5,
+      backgroundColor: '#67595E',
     },
     defaultBtn: {
       width: 100,

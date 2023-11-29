@@ -9,7 +9,7 @@ function GameCategories({ navigation }) {
   const style = styles(insets);
   return (
     <View style={style.container}>
-      <Text>Categories</Text>
+      <Text style={style.defaultFont}>Categories</Text>
       <View style={style.buttons}>
         <Button title="Exit" onPress={() => navigation.goBack()} />
         <Button title="Exit" onPress={() => navigation.goBack()} />
@@ -31,6 +31,10 @@ export const styles = (insets) =>
     buttons: {
       gap: 5,
       width: 100,
+    },
+    defaultFont: {
+      fontSize: 25,
+      color: 'black',
     }
 });
 

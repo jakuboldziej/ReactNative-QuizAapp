@@ -35,6 +35,7 @@ const styles = (insets) =>
       justifyContent: 'center',
       padding: 10,
       gap: 5,
+      backgroundColor: '#67595E',
     },
     circles: {
       flexDirection: 'row',

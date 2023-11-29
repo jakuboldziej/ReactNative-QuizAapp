@@ -84,12 +84,6 @@ function Game({ navigation }) {
   const style = styles(insets)
   return (
     <View style={style.container}>
-      {/* <View style={style.circles}>
-        <View style={[{backgroundColor: circleBg[0]}, style.circle]}/>
-        <View style={[{backgroundColor: circleBg[1]}, style.circle]}/>
-        <View style={[{backgroundColor: circleBg[2]}, style.circle]}/>
-        <View style={[{backgroundColor: circleBg[3]}, style.circle]}/>
-      </View> */}
       <GameLevelCirles circleBg={circleBg} game={true}/>
       <View>
         <Text style={[{fontSize: 25, marginVertical: 10}, style.defaultFont]}>{question["question"]}</Text>
@@ -134,7 +128,7 @@ const styles = (insets) =>
       borderRadius: 44/2,
     },
     defaultFont: {
-      color: 'white'
+      color: 'black',
     }
   })
 

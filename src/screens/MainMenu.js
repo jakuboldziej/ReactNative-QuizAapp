@@ -1,49 +1,31 @@
-/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Text, View, ScrollView, Button, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-function MainMenu() {
-  const [statyw, setStatyw] = useState(0);
-  
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setStatyw(statyw + 1);
-    }, 1000);
-    
-    return () => {
-      clearInterval(timer);
-    };
-  });
+function MainMenu({ navigation }) {
   
   const insets = useSafeAreaInsets();
   const style = styles(insets);
   return (
     <View style={style.container}>
-      <ScrollView contentContainerStyle={style.scrollView}>
-        <View style={style.buttons}>
-          <Button title='+' color="#f194ff" onPress={() => setStatyw(statyw + 1)}/>
-          <Button title='-' color="#f194ff" onPress={() => setStatyw(statyw - 1)}/>
-          <Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text><Text>{statyw}</Text>
-          <Text>Bottom</Text>
-        </View>
-      </ScrollView>
+      <Text style={style.defaultFont}>QuizApp</Text>
+      <Button title="Quick Play" onPress={() => navigation.navigate("Game")} />
     </View>
   );
 }
 export const styles = (insets) => StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     marginTop: insets.top,
-  },
-  scrollView: {
-    backgroundColor: '#67595E',
     padding: 10,
+    gap: 5,
   },
-  buttons: {
-    flexDirection: 'column',
-    width: 100,
-    gap: 5
+  defaultFont: {
+    color: 'black',
+    fontSize: 25,
   }
 })
 export default MainMenu

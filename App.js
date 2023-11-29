@@ -6,7 +6,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context"
 function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={{colors: {background: '#67595E'}}}>
         <Stacks />
       </NavigationContainer>
     </SafeAreaProvider>
