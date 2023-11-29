@@ -5,7 +5,7 @@ import Answers from "../components/Answers"
 import questions from "../components/data.json"
 import { useState, useEffect } from "react"
 import { View, Text,  BackHandler, StyleSheet } from "react-native"
-import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 const buttonBgs = {
   "0": "#A49393",
@@ -101,31 +101,6 @@ const styles = (insets) =>
       alignItems: 'center',
       padding: 10,
       backgroundColor: '#67595E',
-    },
-    exitBtn: {
-      flex: 1,
-      width: safeArea().width - 20,
-      justifyContent: 'flex-end',
-    },
-    defaultBtn: {
-      width: 100,
-      alignItems: 'center',
-      backgroundColor: '#028bfa',
-      padding: 10,
-      borderRadius: 5
-    },
-    circles: {
-      flex: 1,
-      flexDirection: 'row',
-      position: 'absolute',
-      left: 10,
-      top: 5,
-      gap: 5,
-    },
-    circle: {
-      width: 10,
-      height: 10,
-      borderRadius: 44/2,
     },
     defaultFont: {
       color: 'black',

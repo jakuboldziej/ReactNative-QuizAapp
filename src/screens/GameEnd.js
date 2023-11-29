@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react"
-import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native"
+import Button from "../components/Button"
+import { View, StyleSheet, Text } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
 
 function GameEnd({ navigation }) {
@@ -9,13 +10,19 @@ function GameEnd({ navigation }) {
   const style = styles(insets)
   return (
     <View style={style.container}>
-      <Text>GameEnd</Text>
+      <View style={style.gameResult}>
+        <Text style={style.defaultFont}>Category/Random</Text>
+      </View>
+      <View style={style.infoContainer}>
+        <Text style={style.defaultFont}>User Nick</Text>
+        <Text>User Level</Text>
+      </View>
+      <View style={style.pointsContainer}>
+        <Text style={style.defaultFont}>Points Summary</Text>
+        <View style={style.pointsGained}/>
+      </View>
       <View style={style.exitBtn}>
-        <TouchableNativeFeedback onPress={() => navigation.navigate("Tabs")}>
-          <View style={[style.defaultBtn, {width: '100%'}]}>
-            <Text style={{color: 'white'}}>Exit</Text>
-          </View>
-        </TouchableNativeFeedback>
+        <Button title="Exit" props={{onPress: () => navigation.navigate("Tabs"), optionalStyle: {width: safeArea().width - 20}}} type="default"/>
       </View>
     </View>
   )
@@ -27,22 +34,36 @@ const styles = (insets) =>
       flex: 1,
       marginTop: insets.top,
       alignItems: 'center',
-      padding: 10,
       gap: 5,
       backgroundColor: '#67595E',
     },
-    defaultBtn: {
-      width: 100,
+    infoContainer: {
       alignItems: 'center',
-      backgroundColor: '#028bfa',
-      padding: 10,
-      borderRadius: 5
+      gap: 5,
+    },
+    pointsContainer: {
+      alignItems: 'center',
+      gap: 5,
+    },
+    defaultFont: {
+      fontSize: 25,
+      color: 'black',
+    },
+    gameResult: {
+      backgroundColor: '#A49393', 
+      width: '100%',
+      fontSize: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 50
     },
     exitBtn: {
+      marginBottom: 10,
       flex: 1,
       width: safeArea().width - 20,
       justifyContent: 'flex-end',
     },
+    
   })
 
 export default GameEnd

@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import Button from "../components/Button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 function GameMenu({ navigation }) {
   const insets = useSafeAreaInsets();
@@ -10,8 +11,8 @@ function GameMenu({ navigation }) {
     <View style={style.container}>
       <Text style={{fontSize: 25}}>Game Menu Area</Text>
       <View style={style.buttons}>
-        <Button title="Play Random" onPress={() => navigation.navigate("Game")} />
-        <Button title="Categories" onPress={() => navigation.navigate("GameCategories")} />
+        <Button title="Play Random" props={{onPress: () => navigation.navigate("Game")}} />
+        <Button title="Categories" props={{onPress: () => navigation.navigate("GameCategories")}} />
       </View>
     </View>
   );

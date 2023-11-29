@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Text, View, ScrollView, Button, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Button from '../components/Button';
 
 function MainMenu({ navigation }) {
   
@@ -11,7 +12,7 @@ function MainMenu({ navigation }) {
   return (
     <View style={style.container}>
       <Text style={style.defaultFont}>QuizApp</Text>
-      <Button title="Quick Play" onPress={() => navigation.navigate("Game")} />
+      <Button title="Quick Play" props={{onPress: () => navigation.navigate("Game")}}/>
     </View>
   );
 }

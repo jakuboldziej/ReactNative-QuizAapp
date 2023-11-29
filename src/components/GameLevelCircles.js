@@ -6,12 +6,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 function GameLevelCirles({circleBg, game}) {
   const insets = useSafeAreaInsets()
   const style = styles(insets)
-  const dynamicStyles = game
+  const dynamicStyle = game
   ? style.gameCircles
   : style.DRICircles;
 
   return (
-    <View style={dynamicStyles}>
+    <View style={dynamicStyle}>
         {Object.entries(circleBg).map((entry, i) => (
           <View key={entry[0]} style={[{backgroundColor: circleBg[i]}, style.circle]}/>
         ))}

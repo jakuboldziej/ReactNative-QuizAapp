@@ -37,15 +37,6 @@ const styles = (insets) =>
       gap: 5,
       backgroundColor: '#67595E',
     },
-    circles: {
-      flexDirection: 'row',
-      gap: 5,
-    },
-    circle: {
-      width: 10,
-      height: 10,
-      borderRadius: 44/2,
-    }
   })
 
 export default DisplayRoundInfo

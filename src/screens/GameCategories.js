@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native"
+import Button from "../components/Button";
+import { View, Text, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 function GameCategories({ navigation }) {
@@ -11,12 +12,12 @@ function GameCategories({ navigation }) {
     <View style={style.container}>
       <Text style={style.defaultFont}>Categories</Text>
       <View style={style.buttons}>
-        <Button title="Exit" onPress={() => navigation.goBack()} />
-        <Button title="Exit" onPress={() => navigation.goBack()} />
-        <Button title="Exit" onPress={() => navigation.goBack()} />
-        <Button title="Exit" onPress={() => navigation.goBack()} />
-        <Button title="Exit" onPress={() => navigation.goBack()} />
-        <Button title="Exit" onPress={() => navigation.goBack()} />
+        <Button title="Exit" props={{onPress: () => navigation.goBack()}} />
+        <Button title="Exit" props={{onPress: () => navigation.goBack()}} />
+        <Button title="Exit" props={{onPress: () => navigation.goBack()}} />
+        <Button title="Exit" props={{onPress: () => navigation.goBack()}} />
+        <Button title="Exit" props={{onPress: () => navigation.goBack()}} />
+        <Button title="Exit" props={{onPress: () => navigation.goBack()}} />
       </View>
     </View>
   )
