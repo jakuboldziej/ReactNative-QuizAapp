@@ -12,14 +12,14 @@ function GameLevelCirles({circleBg, game}) {
 
   return (
     <View style={dynamicStyle}>
-        {Object.entries(circleBg).map((entry, i) => (
-          <View key={entry[0]} style={[{backgroundColor: circleBg[i]}, style.circle]}/>
-        ))}
+      {Object.entries(circleBg).map((entry, i) => (
+        <View key={entry[0]} style={[{backgroundColor: circleBg[i]}, style.circle]}/>
+      ))}
     </View>
   )
 }
 
-const styles = (insets) =>
+const styles = () =>
   StyleSheet.create({
     gameCircles: {
       flex: 1,

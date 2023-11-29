@@ -41,7 +41,7 @@ function Game({ navigation }) {
         [question['id']]: "green"
       })
 
-      await sleep(3000)
+      await sleep(2000)
       manageRoundState("green");
     } else {
       setCorrectButtonBg({
@@ -54,7 +54,7 @@ function Game({ navigation }) {
         [question['id']]: "red"
       })
 
-      await sleep(3000)
+      await sleep(2000)
       manageRoundState("red");
     }
   }
@@ -67,14 +67,21 @@ function Game({ navigation }) {
           ...circleBg, 
           [question['id']]: color
         },
-        "round": nextQuestion["id"] + 1
+        "round": nextQuestion["id"] + 1,
+        "category": question['category']
       })
       await sleep(1000)
       setQuestion(nextQuestion);
       setButtonsDisabled(false);
       setCorrectButtonBg(buttonBgs);
     } else {
-      navigation.navigate("GameEnd")
+      navigation.navigate("GameEnd", {
+        "circleBg": {
+          ...circleBg, 
+          [question['id']]: color
+        },
+        "category": question['category']
+      })
     }
   }
 

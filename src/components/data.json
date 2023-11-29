@@ -1,6 +1,7 @@
 [
   {
     "id": 0,
+    "category": "All",
     "question": "which answer is correct? 1",
     "answers": {
       "0": "answer0111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
@@ -12,6 +13,7 @@
   },
   {
     "id": 1,
+    "category": "All",
     "question": "which answer is correct? 2",
     "answers": {
       "0": "answer02",
@@ -20,27 +22,6 @@
       "3": "answer32"
     },
     "correct_answer": 1
-  },
-  {
-    "id": 2,
-    "question": "which answer is correct? 3",
-    "answers": {
-      "0": "answer02",
-      "1": "answer12",
-      "2": "answer22",
-      "3": "answer32"
-    },
-    "correct_answer": 1
-  },
-  {
-    "id": 3,
-    "question": "which answer is correct? 4",
-    "answers": {
-      "0": "answer02",
-      "1": "answer12",
-      "2": "answer22",
-      "3": "answer32"
-    },
-    "correct_answer": 1
   }
+
 ]

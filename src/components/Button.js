@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from "react"
-import { useRef, useEffect, useState } from "react";
 import { TouchableNativeFeedback, View, Text, StyleSheet } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
 
@@ -24,7 +23,7 @@ function Button({ props, type, title }) {
   )
 }
 
-const styles = (insets) =>
+const styles = () =>
   StyleSheet.create({
     exitBtn: {
       flex: 1,
@@ -32,7 +31,6 @@ const styles = (insets) =>
       justifyContent: 'flex-end',
     },
     defaultBtn: {
-      width: 100,
       alignItems: 'center',
       backgroundColor: '#028bfa',
       padding: 10,
