@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, Button, TextInput } from "react-native"
+import { View, Text, Button, TextInput, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
 
 function Profile({navigation}) {
   const [inputValue, setInputValue] = useState('');

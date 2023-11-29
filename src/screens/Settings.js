@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
-import { Text, View, Button } from "react-native"
+import { Text, View, Button, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { StyleSheet } from "react-native";
 
 function Settings({navigation}) {
 
