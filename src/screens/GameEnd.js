@@ -11,7 +11,7 @@ function GameEnd({ navigation, route }) {
   const { circleBg, category } = route.params
   const manageAnswersCorrect = () => {
     Object.entries(circleBg).map((entry) => {
-      if(entry[1] === "green") {
+      if(entry[1] === "lightgreen") {
         answersCorrect += 1;
       }
     })

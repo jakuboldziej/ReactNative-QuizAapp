@@ -21,15 +21,45 @@ function Game({ navigation }) {
   const [correctButtonBg, setCorrectButtonBg] = useState(buttonBgs);
   const [circleBg, setCircleBg] = useState(Object.fromEntries(Object.entries(buttonBgs).slice(0, questions.length)));
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const initialTime = 15;
+  const [time, setTime] = useState(initialTime);
+  const [timeLeft, setTimeLeft] = useState(0)
+  const [progress, setProgress] = useState(1);
+  const [isPaused, setIsPaused] = useState(false)
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+  // useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+  //   return () => backHandler.remove()
+  // }, [])
+
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-    return () => backHandler.remove()
-  }, [])
+    if (isPaused) {
+      resetTimer()
+      return
+    }
+    if (time === 0) {
+      setProgress(0)
+      manageCorrectAnswer()
+      setTimeLeft(initialTime)
+      return
+    }
+    
+    const interval = setInterval(() => {
+      setTime(prevTimeLeft => prevTimeLeft - 1)
+    }, 1000)
+    
+    setTimeLeft(initialTime - time)
+    setProgress(time / initialTime);
+    return () => clearInterval(interval);
+  }, [time, isPaused])
+
+  const toggleTimer = () => setIsPaused(previsPaused => !previsPaused)
+  const resetTimer = () => setTime(initialTime);
 
   const manageCorrectAnswer = async (buttonId) => {
     setButtonsDisabled(true);
+    toggleTimer()
     let correctAnswer = question["correct_answer"]
     if (correctAnswer === buttonId) {
       setCorrectButtonBg({
@@ -57,6 +87,7 @@ function Game({ navigation }) {
       await sleep(2000)
       manageRoundState("red");
     }
+    return;
   }
 
   const manageRoundState = async (color) => {
@@ -70,10 +101,11 @@ function Game({ navigation }) {
         "round": nextQuestion["id"] + 1,
         "category": question['category']
       })
-      await sleep(1000)
+      await sleep(1999)
       setQuestion(nextQuestion);
       setButtonsDisabled(false);
       setCorrectButtonBg(buttonBgs);
+      toggleTimer()
     } else {
       navigation.navigate("GameEnd", {
         "circleBg": {
@@ -85,13 +117,16 @@ function Game({ navigation }) {
     }
   }
 
-  const answerProps = {buttonsDisabled, correctButtonBg, question, manageCorrectAnswer}
+  const answerProps = {buttonsDisabled, correctButtonBg, question, progress, manageCorrectAnswer}
 
   const insets = useSafeAreaInsets()
   const style = styles(insets)
   return (
     <View style={style.container}>
       <GameLevelCirles circleBg={circleBg} game={true}/>
+      <View style={style.secondsTimer}>
+        <Text>{timeLeft}</Text>
+      </View>
       <View>
         <Text style={[{fontSize: 25, marginVertical: 10}, style.defaultFont]}>{question["question"]}</Text>
       </View>
@@ -111,6 +146,12 @@ const styles = (insets) =>
     },
     defaultFont: {
       color: 'black',
+    },
+    secondsTimer: {
+      flex: 1,
+      position: 'absolute',
+      right: 10,
+      top: 5,
     }
   })
 
