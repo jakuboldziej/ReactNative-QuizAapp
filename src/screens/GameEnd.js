@@ -7,17 +7,17 @@ import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-sa
 
 function GameEnd({ navigation, route }) {
   let answersCorrect = 0;
-  let timePoints = 0;
-  const { circleBg, category } = route.params
+  const { circleBg, category, totalTimeSpent } = route.params
   const manageAnswersCorrect = () => {
     Object.entries(circleBg).map((entry) => {
-      if(entry[1] === "lightgreen") {
+      if(entry[1] === "green") {
         answersCorrect += 1;
       }
     })
   }
+
   manageAnswersCorrect();
-  let pointsGained = answersCorrect + timePoints;
+  let pointsGained = answersCorrect + totalTimeSpent;
 
   const insets = useSafeAreaInsets()
   const style = styles(insets)
@@ -47,7 +47,7 @@ function GameEnd({ navigation, route }) {
           <View>
             <Text style={{textAlign: 'center'}}>Time</Text>
             <View style={style.pointsGained}>
-              <Text style={{fontSize: 16, color: 'yellow'}}>{timePoints}</Text>
+              <Text style={{fontSize: 16, color: 'yellow'}}>{totalTimeSpent}</Text>
             </View>
           </View>
           <View style={{textAlign: 'flex-end', justifyContent: 'center'}}>
@@ -56,7 +56,7 @@ function GameEnd({ navigation, route }) {
           <View>
             <Text style={{textAlign: 'center'}}>Gained</Text>
             <View style={style.pointsGained}>
-              <Text style={{fontSize: 16, color: 'yellow'}}>{pointsGained}</Text>
+              <Text style={{fontSize: 16, color: 'blue'}}>{pointsGained}</Text>
             </View>
           </View>
         </View>

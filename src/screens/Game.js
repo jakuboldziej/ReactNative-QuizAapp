@@ -23,7 +23,8 @@ function Game({ navigation }) {
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const initialTime = 15;
   const [time, setTime] = useState(initialTime);
-  const [timeLeft, setTimeLeft] = useState(0)
+  const [totalTimeSpent, setTotalTimeSpent] = useState(0)
+  const [timeSpent, setTimeSpent] = useState(0);
   const [progress, setProgress] = useState(1);
   const [isPaused, setIsPaused] = useState(false)
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -41,21 +42,23 @@ function Game({ navigation }) {
     if (time === 0) {
       setProgress(0)
       manageCorrectAnswer()
-      setTimeLeft(initialTime)
+      setTimeSpent(initialTime)
       return
     }
     
     const interval = setInterval(() => {
-      setTime(prevTimeLeft => prevTimeLeft - 1)
+      setTime(prevTimeLeft => prevTimeLeft - 5)
     }, 1000)
     
-    setTimeLeft(initialTime - time)
+    setTimeSpent(initialTime - time)
     setProgress(time / initialTime);
     return () => clearInterval(interval);
   }, [time, isPaused])
 
   const toggleTimer = () => setIsPaused(previsPaused => !previsPaused)
-  const resetTimer = () => setTime(initialTime);
+  const resetTimer = () => {
+    setTime(initialTime);
+  }
 
   const manageCorrectAnswer = async (buttonId) => {
     setButtonsDisabled(true);
@@ -112,7 +115,8 @@ function Game({ navigation }) {
           ...circleBg, 
           [question['id']]: color
         },
-        "category": question['category']
+        "category": question['category'],
+        "totalTimeSpent": totalTimeSpent
       })
     }
   }
@@ -125,7 +129,7 @@ function Game({ navigation }) {
     <View style={style.container}>
       <GameLevelCirles circleBg={circleBg} game={true}/>
       <View style={style.secondsTimer}>
-        <Text>{timeLeft}</Text>
+        <Text>{timeSpent}</Text>
       </View>
       <View>
         <Text style={[{fontSize: 25, marginVertical: 10}, style.defaultFont]}>{question["question"]}</Text>
