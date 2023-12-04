@@ -3,7 +3,7 @@ import React from "react"
 import GameLevelCirles from "../components/GameLevelCircles"
 import Answers from "../components/Answers"
 import questions from "../components/data.json"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { View, Text,  BackHandler, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -13,55 +13,63 @@ const buttonBgs = {
   "2": "#A49393",
   "3": "#A49393"
 }
+let circleBGG = {};
+Object.keys(questions).forEach((i) => {
+  circleBGG[i.toString()] = "#A49393";
+});
 
 function Game({ navigation }) {
   const [question, setQuestion] = useState(() => {
     return questions[0]
   });
   const [correctButtonBg, setCorrectButtonBg] = useState(buttonBgs);
-  const [circleBg, setCircleBg] = useState(Object.fromEntries(Object.entries(buttonBgs).slice(0, questions.length)));
+  const [circleBg, setCircleBg] = useState(circleBGG);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const initialTime = 15;
+  const timeIncre = 1;
   const [time, setTime] = useState(initialTime);
-  const [totalTimeSpent, setTotalTimeSpent] = useState(0)
-  const [timeSpent, setTimeSpent] = useState(0);
+  const totalTimeSpentRef = useRef(0)
   const [progress, setProgress] = useState(1);
   const [isPaused, setIsPaused] = useState(false)
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-
+  
   // useEffect(() => {
   //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
   //   return () => backHandler.remove()
   // }, [])
 
+  // Timer
   useEffect(() => {
     if (isPaused) {
-      resetTimer()
       return
     }
+    
     if (time === 0) {
       setProgress(0)
       manageCorrectAnswer()
-      setTimeSpent(initialTime)
       return
     }
-    
+
     const interval = setInterval(() => {
-      setTime(prevTimeLeft => prevTimeLeft - 5)
+      setTime(prevTimeLeft => prevTimeLeft - timeIncre)
+      totalTimeSpentRef.current += timeIncre
     }, 1000)
     
-    setTimeSpent(initialTime - time)
     setProgress(time / initialTime);
     return () => clearInterval(interval);
-  }, [time, isPaused])
+  }, [time, isPaused, totalTimeSpentRef])
+
+  useEffect(() => {
+    // console.log('debug circleBg:', circleBg)
+  }, [circleBg]);
 
   const toggleTimer = () => setIsPaused(previsPaused => !previsPaused)
-  const resetTimer = () => {
-    setTime(initialTime);
-  }
+  const resetTimer = () => setTime(initialTime)
 
+  // Manage
   const manageCorrectAnswer = async (buttonId) => {
     setButtonsDisabled(true);
+    resetTimer()
     toggleTimer()
     let correctAnswer = question["correct_answer"]
     if (correctAnswer === buttonId) {
@@ -75,7 +83,7 @@ function Game({ navigation }) {
       })
 
       await sleep(2000)
-      manageRoundState("green");
+      await manageRoundState("green");
     } else {
       setCorrectButtonBg({
         ...correctButtonBg, 
@@ -88,7 +96,7 @@ function Game({ navigation }) {
       })
 
       await sleep(2000)
-      manageRoundState("red");
+      await manageRoundState("red");
     }
     return;
   }
@@ -116,10 +124,22 @@ function Game({ navigation }) {
           [question['id']]: color
         },
         "category": question['category'],
-        "totalTimeSpent": totalTimeSpent
+        "totalTimeSpent": totalTimeSpentRef.current
       })
     }
   }
+
+  const formatTimer = (totalSeconds) => {
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+
+    const formattedTime = [
+      minutes.toString().padStart(2, '0'),
+      secs.toString().padStart(2, '0'),
+    ].join(':');
+
+    return formattedTime;
+  };
 
   const answerProps = {buttonsDisabled, correctButtonBg, question, progress, manageCorrectAnswer}
 
@@ -129,7 +149,7 @@ function Game({ navigation }) {
     <View style={style.container}>
       <GameLevelCirles circleBg={circleBg} game={true}/>
       <View style={style.secondsTimer}>
-        <Text>{timeSpent}</Text>
+        <Text>{formatTimer(totalTimeSpentRef.current)}</Text>
       </View>
       <View>
         <Text style={[{fontSize: 25, marginVertical: 10}, style.defaultFont]}>{question["question"]}</Text>

@@ -2,12 +2,15 @@
 import React from "react"
 import Button from "../components/Button"
 import GameLevelCirles from "../components/GameLevelCircles"
+import { useEffect } from "react"
 import { View, StyleSheet, Text } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
 
 function GameEnd({ navigation, route }) {
   let answersCorrect = 0;
+  let pointsGained = 0;
   const { circleBg, category, totalTimeSpent } = route.params
+
   const manageAnswersCorrect = () => {
     Object.entries(circleBg).map((entry) => {
       if(entry[1] === "green") {
@@ -15,9 +18,36 @@ function GameEnd({ navigation, route }) {
       }
     })
   }
+  manageAnswersCorrect()
 
-  manageAnswersCorrect();
-  let pointsGained = answersCorrect + totalTimeSpent;
+  const formatTimer = (totalSeconds) => {
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+
+    const formattedTime = [
+      minutes.toString().padStart(2, '0'),
+      secs.toString().padStart(2, '0'),
+    ].join(':');
+
+    return formattedTime;
+  };
+
+  const calculatePointsGained = () => {
+    if(totalTimeSpent <= 3){
+      pointsGained += 5;
+    } else if(totalTimeSpent > 3 && totalTimeSpent <= 6) {
+      pointsGained += 3
+    } else if(totalTimeSpent > 6 && totalTimeSpent <= 9) {
+      pointsGained += 2
+    } else if(totalTimeSpent > 9 && totalTimeSpent <= 12) {
+      pointsGained += 1
+    } else if(12 < totalTimeSpent) {
+      pointsGained += 0
+    }
+  }
+  calculatePointsGained()
+
+  pointsGained += answersCorrect
 
   const insets = useSafeAreaInsets()
   const style = styles(insets)
@@ -47,7 +77,7 @@ function GameEnd({ navigation, route }) {
           <View>
             <Text style={{textAlign: 'center'}}>Time</Text>
             <View style={style.pointsGained}>
-              <Text style={{fontSize: 16, color: 'yellow'}}>{totalTimeSpent}</Text>
+              <Text style={{fontSize: 16, color: 'yellow'}}>{formatTimer(totalTimeSpent)}</Text>
             </View>
           </View>
           <View style={{textAlign: 'flex-end', justifyContent: 'center'}}>

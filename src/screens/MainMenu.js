@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import questions from "../components/data.json"
 import { useEffect, useState } from 'react';
 import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,11 +8,18 @@ import Button from '../components/Button';
 
 function MainMenu({ navigation }) {
   
+  const displayRoundParams = {
+    circleBg: null,
+    round: 1,
+    category: 'All'
+  }
+
   const insets = useSafeAreaInsets();
   const style = styles(insets);
   return (
     <View style={style.container}>
       <Text style={style.defaultFont}>QuizApp</Text>
+      {/* <Button title="Quick Play" props={{onPress: () => navigation.navigate("DisplayRoundInfo", displayRoundParams)}}/> */}
       <Button title="Quick Play" props={{onPress: () => navigation.navigate("Game")}}/>
     </View>
   );
