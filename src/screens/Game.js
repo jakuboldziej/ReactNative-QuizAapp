@@ -3,6 +3,7 @@ import React from "react"
 import GameLevelCirles from "../components/GameLevelCircles"
 import Answers from "../components/Answers"
 import questions from "../components/data.json"
+import formatTimer from "../components/FormatTimer"
 import { useState, useEffect, useRef } from "react"
 import { View, Text,  BackHandler, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -60,7 +61,7 @@ function Game({ navigation }) {
   }, [time, isPaused, totalTimeSpentRef])
 
   useEffect(() => {
-    // console.log('debug circleBg:', circleBg)
+    // console.log('Game:', circleBg, question['id'] + 1)
   }, [circleBg]);
 
   const toggleTimer = () => setIsPaused(previsPaused => !previsPaused)
@@ -128,18 +129,6 @@ function Game({ navigation }) {
       })
     }
   }
-
-  const formatTimer = (totalSeconds) => {
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const secs = totalSeconds % 60;
-
-    const formattedTime = [
-      minutes.toString().padStart(2, '0'),
-      secs.toString().padStart(2, '0'),
-    ].join(':');
-
-    return formattedTime;
-  };
 
   const answerProps = {buttonsDisabled, correctButtonBg, question, progress, manageCorrectAnswer}
 

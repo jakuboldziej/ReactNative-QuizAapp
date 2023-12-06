@@ -19,8 +19,8 @@ function MainMenu({ navigation }) {
   return (
     <View style={style.container}>
       <Text style={style.defaultFont}>QuizApp</Text>
-      {/* <Button title="Quick Play" props={{onPress: () => navigation.navigate("DisplayRoundInfo", displayRoundParams)}}/> */}
-      <Button title="Quick Play" props={{onPress: () => navigation.navigate("Game")}}/>
+      <Button title="Quick Play" props={{onPress: () => navigation.navigate("DisplayRoundInfo", displayRoundParams)}}/>
+      {/* <Button title="Quick Play" props={{onPress: () => navigation.navigate("Game")}}/> */}
     </View>
   );
 }
