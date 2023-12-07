@@ -14,25 +14,26 @@ const buttonBgs = {
   "2": "#A49393",
   "3": "#A49393"
 }
-let circleBGG = {};
+
+let circleBGG = {}
 Object.keys(questions).forEach((i) => {
-  circleBGG[i.toString()] = "#A49393";
-});
+  circleBGG[i.toString()] = "#A49393"
+})
 
 function Game({ navigation }) {
   const [question, setQuestion] = useState(() => {
     return questions[0]
-  });
-  const [correctButtonBg, setCorrectButtonBg] = useState(buttonBgs);
-  const [circleBg, setCircleBg] = useState(circleBGG);
-  const [buttonsDisabled, setButtonsDisabled] = useState(false);
-  const initialTime = 15;
-  const timeIncre = 1;
-  const [time, setTime] = useState(initialTime);
+  })
+  const [correctButtonBg, setCorrectButtonBg] = useState(buttonBgs)
+  const [circleBg, setCircleBg] = useState(circleBGG)
+  const [buttonsDisabled, setButtonsDisabled] = useState(false)
+  const initialTime = 15
+  const timeIncre = 1
+  const [time, setTime] = useState(initialTime)
   const totalTimeSpentRef = useRef(0)
-  const [progress, setProgress] = useState(1);
+  const [progress, setProgress] = useState(1)
   const [isPaused, setIsPaused] = useState(false)
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const sleep = ms => new Promise(r => setTimeout(r, ms))
   
   // useEffect(() => {
   //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
@@ -56,20 +57,21 @@ function Game({ navigation }) {
       totalTimeSpentRef.current += timeIncre
     }, 1000)
     
-    setProgress(time / initialTime);
-    return () => clearInterval(interval);
+    setProgress(time / initialTime)
+    return () => clearInterval(interval)
   }, [time, isPaused, totalTimeSpentRef])
 
   useEffect(() => {
     // console.log('Game:', circleBg, question['id'] + 1)
-  }, [circleBg]);
+    // console.log('Game:', question)
+  }, [circleBg, question])
 
   const toggleTimer = () => setIsPaused(previsPaused => !previsPaused)
   const resetTimer = () => setTime(initialTime)
 
   // Manage
   const manageCorrectAnswer = async (buttonId) => {
-    setButtonsDisabled(true);
+    setButtonsDisabled(true)
     resetTimer()
     toggleTimer()
     let correctAnswer = question["correct_answer"]
@@ -77,29 +79,29 @@ function Game({ navigation }) {
       setCorrectButtonBg({
         ...correctButtonBg, 
         [buttonId]: "green"
-      });
+      })
       setCircleBg({
         ...circleBg, 
         [question['id']]: "green"
       })
 
       await sleep(2000)
-      await manageRoundState("green");
+      await manageRoundState("green")
     } else {
       setCorrectButtonBg({
         ...correctButtonBg, 
         [buttonId]: "red",
         [correctAnswer]: "green"
-      });
+      })
       setCircleBg({
         ...circleBg, 
         [question['id']]: "red"
       })
 
       await sleep(2000)
-      await manageRoundState("red");
+      await manageRoundState("red")
     }
-    return;
+    return
   }
 
   const manageRoundState = async (color) => {
@@ -114,9 +116,9 @@ function Game({ navigation }) {
         "category": question['category']
       })
       await sleep(1999)
-      setQuestion(nextQuestion);
-      setButtonsDisabled(false);
-      setCorrectButtonBg(buttonBgs);
+      setQuestion(nextQuestion)
+      setButtonsDisabled(false)
+      setCorrectButtonBg(buttonBgs)
       toggleTimer()
     } else {
       navigation.navigate("GameEnd", {

@@ -1,13 +1,33 @@
 /* eslint-disable react/prop-types */
-import React from "react"
+import React, { useEffect } from "react"
 import Button from "./Button"
+import * as Progress from 'react-native-progress'
+import questions from "../components/data.json"
 import { View, StyleSheet, Text } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import * as Progress from 'react-native-progress'
 import { useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
 
 function Answers({ props }) {
   const { buttonsDisabled, correctButtonBg, question, progress, manageCorrectAnswer } = props
+
+  const shuffle = (array) => { 
+    return array.map((a) => ({ sort: Math.random(), value: a }))
+        .sort((a, b) => a.sort - b.sort)
+        .map((a) => a.value); 
+  }; 
+
+  const handleCorrectAnswer = () => {
+    let correctAnswer = questions[question["id"]]["correct_answer"]
+    let questionAnswers = question["answers"]
+    // console.log("0", question["answers"])
+    
+    shuffle(questionAnswers)
+    console.log("1", questionAnswers)
+  }
+
+  useEffect(() => {
+    handleCorrectAnswer()
+  }, []);
 
   const insets = useSafeAreaInsets()
   const style = styles(insets)
