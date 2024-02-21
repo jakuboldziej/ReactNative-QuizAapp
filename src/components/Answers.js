@@ -22,7 +22,7 @@ function Answers({ props }) {
     // console.log("0", question["answers"])
     
     shuffle(questionAnswers)
-    console.log("1", questionAnswers)
+    // console.log("1", questionAnswers)
   }
 
   useEffect(() => {

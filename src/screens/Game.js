@@ -75,6 +75,7 @@ function Game({ navigation }) {
     resetTimer()
     toggleTimer()
     let correctAnswer = question["correct_answer"]
+    console.log(correctAnswer);
     if (correctAnswer === buttonId) {
       setCorrectButtonBg({
         ...correctButtonBg, 

@@ -8,7 +8,8 @@
       "answer1",
       "answer2",
       "answer3"
-    ]
+    ],
+    "correct_answer": 0
   },
   {
     "id": 1,
@@ -19,7 +20,8 @@
       "answer1",
       "answer2",
       "answer3"
-    ]
+    ],
+    "correct_answer": 1
   },
   {
     "id": 2,
@@ -30,7 +32,8 @@
       "answer1",
       "answer2",
       "answer3"
-    ]
+    ],
+    "correct_answer": 2
   },
   {
     "id": 3,
@@ -41,7 +44,8 @@
       "answer1",
       "answer2",
       "answer3"
-    ]
+    ],
+    "correct_answer": 3
   },
   {
     "id": 4,
@@ -52,6 +56,7 @@
       "answer1",
       "answer2",
       "answer3"
-    ]
+    ],
+    "correct_answer": 4
   }
 ]
