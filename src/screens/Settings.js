@@ -10,7 +10,10 @@ function Settings({navigation}) {
   return (
     <View style={style.container}>
         <Text style={style.defaultFontSize}>Settings</Text>
-        <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
+        <View style={style.buttons}>
+          <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
+          <Button title="Rules" onPress={() => navigation.navigate("Rules")} />
+        </View>
     </View>
   )
 }
@@ -23,6 +26,11 @@ export const styles = (insets) => StyleSheet.create({
   },
   defaultFontSize: {
     fontSize: 25,
+  },
+  buttons: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
   }
 })
 export default Settings

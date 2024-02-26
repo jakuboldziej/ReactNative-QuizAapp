@@ -6,6 +6,7 @@ import GameCategories from "../screens/GameCategories";
 import GameEnd from "../screens/GameEnd";
 import DisplayRoundInfo from "../screens/DisplayRoundInfo";
 import { createStackNavigator } from "@react-navigation/stack"
+import Rules from "../screens/Rules";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ function Stacks() {
         <Stack.Screen name="GameEnd" component={GameEnd}/>
         <Stack.Screen name="DisplayRoundInfo" component={DisplayRoundInfo}/>
         <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="Rules" component={Rules}/>
     </Stack.Navigator>
   )
 }
