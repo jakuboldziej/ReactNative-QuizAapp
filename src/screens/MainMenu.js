@@ -19,7 +19,10 @@ function MainMenu({ navigation }) {
   return (
     <View style={style.container}>
       <Text style={style.defaultFont}>QuizApp</Text>
-      <Button title="Quick Play" props={{onPress: () => navigation.navigate("DisplayRoundInfo", displayRoundParams)}}/>
+      <View style={style.buttons}>
+        <Button title="Quick Play" props={{onPress: () => navigation.navigate("DisplayRoundInfo", displayRoundParams)}}/>
+
+      </View>
       {/* <Button title="Quick Play" props={{onPress: () => navigation.navigate("Game")}}/> */}
     </View>
   );
@@ -35,6 +38,10 @@ export const styles = (insets) => StyleSheet.create({
   defaultFont: {
     color: 'black',
     fontSize: 25,
+  },
+  buttons: {
+    paddingTop: 5,
+    gap: 5,
   }
 })
 export default MainMenu

@@ -29,6 +29,7 @@ export const styles = (insets) =>
       gap: 5,
     },
     buttons: {
+      paddingTop: 5,
       gap: 5,
     }
 });

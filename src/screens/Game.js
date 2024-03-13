@@ -61,11 +61,6 @@ function Game({ navigation }) {
     return () => clearInterval(interval)
   }, [time, isPaused, totalTimeSpentRef])
 
-  useEffect(() => {
-    // console.log('Game:', circleBg, question['id'] + 1)
-    // console.log('Game:', question)
-  }, [circleBg, question])
-
   const toggleTimer = () => setIsPaused(previsPaused => !previsPaused)
   const resetTimer = () => setTime(initialTime)
 
@@ -75,7 +70,6 @@ function Game({ navigation }) {
     resetTimer()
     toggleTimer()
     let correctAnswer = question["correct_answer"]
-    console.log(correctAnswer);
     if (correctAnswer === buttonId) {
       setCorrectButtonBg({
         ...correctButtonBg, 

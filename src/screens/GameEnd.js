@@ -58,7 +58,7 @@ function GameEnd({ navigation, route }) {
       </View>
       <View style={style.infoContainer}>
         <Text style={style.defaultFont}>User Nick</Text>
-        <Text>Category Level(0)</Text>
+        <Text>Level 1</Text>
         <Text style={style.defaultFont}>{answersCorrect}</Text>
       </View>
       <View style={style.pointsContainer}>

@@ -20,6 +20,7 @@ function Settings({navigation}) {
 export const styles = (insets) => StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: "#67595E",
     marginTop: insets.top,
     padding: 10,
@@ -28,8 +29,7 @@ export const styles = (insets) => StyleSheet.create({
     fontSize: 25,
   },
   buttons: {
-    display: "flex",
-    flexDirection: "column",
+    paddingTop: 5,
     gap: 10,
   }
 })
