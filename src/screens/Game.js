@@ -2,11 +2,13 @@
 import React from "react"
 import GameLevelCirles from "../components/GameLevelCircles"
 import Answers from "../components/Answers"
-import questions from "../components/data.json"
+import questions from "../data.json"
 import formatTimer from "../components/FormatTimer"
 import { useState, useEffect, useRef } from "react"
-import { View, Text,  BackHandler, StyleSheet } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import colors from "../constants/colors"
+import routes from "../constants/routes"
 
 const buttonBgs = {
   "0": "#A49393",
@@ -102,7 +104,7 @@ function Game({ navigation }) {
   const manageRoundState = async (color) => {
     if(question.id < questions.length - 1) { 
       const nextQuestion = questions[question["id"] + 1]
-      navigation.navigate("DisplayRoundInfo", {
+      navigation.navigate(routes.DisplayRoundInfo, {
         "circleBg": {
           ...circleBg, 
           [question['id']]: color
@@ -116,7 +118,7 @@ function Game({ navigation }) {
       setCorrectButtonBg(buttonBgs)
       toggleTimer()
     } else {
-      navigation.navigate("GameEnd", {
+      navigation.navigate(routes.GameEnd, {
         "circleBg": {
           ...circleBg, 
           [question['id']]: color
@@ -152,7 +154,7 @@ const styles = (insets) =>
       marginTop: insets.top,
       alignItems: 'center',
       padding: 10,
-      backgroundColor: '#67595E',
+      backgroundColor: colors.mainBackgroundColor,
     },
     defaultFont: {
       color: 'black',

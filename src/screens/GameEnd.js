@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react"
-import Button from "../components/Button"
+import Button from "../components/MyButton"
 import GameLevelCirles from "../components/GameLevelCircles"
-import { useEffect } from "react"
 import { View, StyleSheet, Text } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
+import colors from "../constants/colors"
+import routes from "../constants/routes"
 
 function GameEnd({ navigation, route }) {
   let answersCorrect = 0;
@@ -92,7 +93,7 @@ function GameEnd({ navigation, route }) {
         </View>
       </View>
       <View style={style.exitBtn}>
-        <Button title="Exit" props={{onPress: () => navigation.navigate("Tabs"), optionalStyle: {width: safeArea().width - 20}}} type="default"/>
+        <Button title="Exit" props={{onPress: () => navigation.navigate(routes.Drawer), optionalStyle: {width: safeArea().width - 20}}} type="default"/>
       </View>
     </View>
   )
@@ -105,7 +106,7 @@ const styles = (insets) =>
       marginTop: insets.top,
       alignItems: 'center',
       gap: 5,
-      backgroundColor: '#67595E',
+      backgroundColor: colors.mainBackgroundColor,
     },
     infoContainer: {
       alignItems: 'center',

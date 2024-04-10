@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react"
-import Button from "./Button"
+import Button from "./MyButton"
 import * as Progress from 'react-native-progress'
-import questions from "../components/data.json"
-import { View, StyleSheet, Text } from "react-native"
+import questions from "../data.json"
+import { View, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
 

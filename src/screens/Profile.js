@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, Button, TextInput, StyleSheet } from "react-native"
+import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import colors from "../constants/colors";
 
-function Profile({navigation}) {
+function Profile({ navigation }) {
   const [inputValue, setInputValue] = useState('');
   const [nick, setNick] = useState('');
   useEffect(() => {
@@ -17,28 +18,27 @@ function Profile({navigation}) {
     <View style={style.container}>
       <Text>{nick}</Text>
       <TextInput style={{
-            padding: 10,
-            borderColor: 'red',
-            borderWidth: 1,
-            borderRadius: 50,
-          }}
-          onChangeText={setInputValue}
-          value={inputValue}
-          placeholder={'Change your name...'}/>
-        <Button title="Save" onPress={() => {alert("Changed: " + inputValue); navigation.goBack()}} />
+        padding: 10,
+        borderColor: 'red',
+        borderWidth: 1,
+        borderRadius: 50,
+      }}
+        onChangeText={setInputValue}
+        value={inputValue}
+        placeholder={'Change your name...'} />
+      <Button title="Save" onPress={() => { alert("Changed: " + inputValue); navigation.goBack() }} />
     </View>
   )
 }
 
-export const styles = (insets) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'flex-start',
-      gap: 10,
-      marginTop: insets.top,
-      padding: 10,
-    },
+export const styles = (insets) => StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.mainBackgroundColor,
+    justifyContent: 'flex-start',
+    gap: 10,
+    padding: 10,
+  },
 });
 
 export default Profile

@@ -1,15 +1,19 @@
+import 'react-native-gesture-handler';
 import React from "react"
-import Stacks from "./src/components/Stacks"
+import Stacks from "./src/navigations/Stacks"
 import { NavigationContainer } from "@react-navigation/native"
 import { SafeAreaProvider } from "react-native-safe-area-context"
+import { AuthContextProvider } from "./src/context/AuthContext"
 
 function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer theme={{colors: {background: '#67595E'}}}>
-        <Stacks />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <AuthContextProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stacks />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </AuthContextProvider>
   )
 }
 

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react";
 import GameLevelCirles from "../components/GameLevelCircles";
-import questions from "../components/data.json"
-import { View, StyleSheet, Text } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import questions from "../data.json";
+import { View, StyleSheet, Text } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import colors from "../constants/colors";
 
 function DisplayRoundInfo({ navigation, route }) {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -51,7 +52,7 @@ const styles = (insets) =>
       justifyContent: 'center',
       padding: 10,
       gap: 5,
-      backgroundColor: '#67595E',
+      backgroundColor: colors.mainBackgroundColor,
     },
   })
 
