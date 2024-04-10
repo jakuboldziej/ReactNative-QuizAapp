@@ -4,11 +4,14 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import GameMenu from "../screens/GameMenu"
 import MainMenu from "../screens/MainMenu"
 import Settings from "../screens/Settings"
+import Profile from "../screens/Profile";
 import colors from "../constants/colors"
+import routes from "../constants/routes";
+import { AntDesign } from '@expo/vector-icons';
 
 const Tab = createMaterialBottomTabNavigator()
 
-function Tabs() {
+function Tabs({ setActiveTab }) {
   const theme = useTheme();
   theme.colors.secondaryContainer = "transperent"
 
@@ -19,19 +22,22 @@ function Tabs() {
         tabBarIcon: ({focused}) => (
           <MaterialCommunityIcons name={focused ? 'layers' : 'layers-outline'} size={25} color={focused ? '#e91e63' : 'black'}/>
         )
-      }}/>
+      }}
+      listeners={({route}) => ({state: () => setActiveTab(route.name)})}/>
       <Tab.Screen name='MainMenu' component={MainMenu} options={{
         tabBarLabel: 'MainMenu',
         tabBarIcon: ({focused}) => (
-          <MaterialIcons name={'menu-book'} size={25} color={focused ? '#e91e63' : 'black'}/>
+          <MaterialIcons name='menu-book' size={25} color={focused ? '#e91e63' : 'black'}/>
         )
-      }}/>
-      <Tab.Screen name='Settings' component={Settings} options={{
-        tabBarLabel: 'Settings',
+      }}
+      listeners={({route}) => ({state: () => setActiveTab(route.name)})}/>
+      <Tab.Screen name={routes.Profile} component={Profile} options={{
+        tabBarLabel: routes.Profile,
         tabBarIcon: ({focused}) => (
-          <MaterialIcons name={'settings'} size={25} color={focused ? '#e91e63' : 'black'}/>
+          <AntDesign name="user" size={25} color={focused ? '#e91e63' : 'black'} />
         )
-      }}/>
+      }}
+      listeners={({route}) => ({state: () => setActiveTab(route.name)})}/>
     </Tab.Navigator>
   )
 }

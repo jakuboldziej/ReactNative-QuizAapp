@@ -7,5 +7,7 @@ export default {
   Profile: 'Profile',
   Rules: 'Rules',
   Login: 'Login',
-  Register: 'Register'
+  Register: 'Register',
+  Settings: 'Settings',
+  Profile: 'Profile'
 }

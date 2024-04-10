@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Profile from "../screens/Profile";
@@ -9,11 +9,13 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Tabs from "./Tabs";
+import Settings from "../screens/Settings";
 
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   const [search, setSearch] = useState(false);
+  const [activeTab, setActiveTab] = useState('MainMenu');
 
   const drawerOptions = {
     drawerStyle: {
@@ -23,13 +25,13 @@ function MyDrawer() {
     headerStyle: {
       backgroundColor: colors.navigationColor
     },
-    headerRight: () => <CustomHeaderComponent search={search} setSearch={setSearch} />,
+    headerRight: () => <CustomHeaderComponent search={search} setSearch={setSearch} activeTab={activeTab} />,
 
   }
   return (
-    <Drawer.Navigator initialRouteName="Tabs" screenOptions={drawerOptions} drawerContent={({props}) => <DrawerCustomContent {...props} />}>
-      <Drawer.Screen name="Tabs" component={Tabs} />
-      <Drawer.Screen name="Profile" component={Profile} />
+    <Drawer.Navigator initialRouteName="Tabs" screenOptions={drawerOptions} drawerContent={({ props }) => <DrawerCustomContent {...props} />}>
+      <Drawer.Screen name="Tabs" children={() => <Tabs setActiveTab={setActiveTab} />} />
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }
@@ -64,21 +66,33 @@ export const CustomContentStyles = (insets) => StyleSheet.create({
   }
 })
 
-function CustomHeaderComponent({ search, setSearch }) {
+function CustomHeaderComponent({ search, setSearch, activeTab }) {
   const [searchInput, setSearchInput] = useState('');
-  return (
-    <>
-      {search ? (
-        <View style={{width: '100%', flexDirection: 'row', gap: 5, alignItems: 'center'}}>
-          <MaterialCommunityIcons name="arrow-left" size={23} onPress={() => setSearch(prev => !prev)} />
-          <TextInput autoFocus={true} style={{ width: '50%' }} value={searchInput} onChangeText={(text) => setSearchInput(text)} placeholder={` Search category...`} />
-          {searchInput.length > 0 && <MaterialCommunityIcons name="close" size={23} onPress={() => setSearchInput('')} />} 
-        </View>
-      ) : (
-        <MaterialIcons name="search" size={23} style={{paddingRight: 10}} onPress={() => setSearch(prev => !prev)}/>
-      )}
-    </>
-  )
+
+  switch (activeTab) {
+    case 'Play':
+      return;
+    case 'MainMenu':
+      return (
+        <>
+          {search ? (
+            <View style={{ width: '100%', flexDirection: 'row', gap: 5, alignItems: 'center' }}>
+              <MaterialCommunityIcons name="arrow-left" size={23} onPress={() => setSearch(prev => !prev)} />
+              <TextInput autoFocus={true} style={{ width: '50%' }} value={searchInput} onChangeText={(text) => setSearchInput(text)} placeholder={` Search category...`} />
+              {searchInput.length > 0 && <MaterialCommunityIcons name="close" size={23} onPress={() => setSearchInput('')} />}
+            </View>
+          ) : (
+            <MaterialIcons name="search" size={23} style={{ paddingRight: 10 }} onPress={() => setSearch(prev => !prev)} />
+          )}
+        </>
+      );
+    case 'Profile':
+      return (
+        <MaterialCommunityIcons name="dots-vertical" style={{ paddingRight: 10 }} size={24} />
+      );
+    default:
+      return null;
+  }
 }
 
 export default MyDrawer;
