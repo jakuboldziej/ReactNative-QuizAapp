@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
@@ -10,17 +10,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Tabs from "./Tabs";
 import Settings from "@screens/Settings";
 import routes from "@constants/routes";
-import { useNavigation } from '@react-navigation/native';
 import { handleSignOut } from "@utils";
-import questions from "../data.json"
-import { handleGameStart } from "@utils";
-import { GameContext } from "@context/GameContext";
+import { useNavigation } from '@react-navigation/native';
+import { DrawerActions } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   const [search, setSearch] = useState(false);
-  const [activeTab, setActiveTab] = useState('MainMenu');
+  const [activeTab, setActiveTab] = useState(routes.Home);
 
   const drawerOptions = {
     drawerStyle: {
@@ -45,11 +43,11 @@ function MyDrawer() {
 
 const DrawerCustomContent = () => {
   const { user } = useContext(AuthContext);
-  const { setGame, } = useContext(GameContext);
 
   const navigation = useNavigation();
 
   const handleQuickPlay = () => {
+    navigation.dispatch(DrawerActions.toggleDrawer());
     const creatingGameProps = {
       startCategory: 'Random',
     }

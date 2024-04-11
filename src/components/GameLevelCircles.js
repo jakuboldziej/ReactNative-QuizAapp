@@ -6,7 +6,7 @@ import { GameContext } from "@context/GameContext";
 import { AuthContext } from "context/AuthContext";
 
 function GameLevelCircles({ showType }) {
-  const { game, circles } = useContext(GameContext);
+  const { circles } = useContext(GameContext);
   const { user } = useContext(AuthContext);
 
   const insets = useSafeAreaInsets();
@@ -20,7 +20,6 @@ function GameLevelCircles({ showType }) {
           <View key={i} style={[{ backgroundColor: circle }, style.circle]} />
         ))}
       </View>
-
     </View>
   )
 }

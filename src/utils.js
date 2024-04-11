@@ -14,16 +14,9 @@ export const handleSignOut = async (navigation) => {
   }
 }
 
-export const updateCircles = (circles, color, buttonId) => {
-  const circlesCopy = [...circles];
-  circlesCopy.map((circle, index) => {
-    if (buttonId === index) {
-      return circlesCopy[index] = color;
-    } else {
-      return circle;
-    }
-  })
-  return circlesCopy;
+export const updateCircles = (circles, color, round) => {
+  circles[round - 1] = color;
+  return circles;
 }
 
 export const formatTimer = (totalSeconds) => {
@@ -50,13 +43,13 @@ export const getQuestion = async (uid) => {
   return question.data();
 }
 
-export const getCategoryByName = async (categoryName) => {
-  let category;
-  const cetagoryQ = query(collection(firebaseDb, "categories"), where("name", "==", categoryName));
-  await getDocs(cetagoryQ).then((snapshot) => {
-    snapshot.docs.map((doc) => {
-      category = doc.data()
-    });
-  });
-  return category;
+export const getCategories = async () => {
+  const categoriesQ = await getDocs(collection(firebaseDb, "categories"));
+  const categories = categoriesQ.docs.map((category) => category.data());
+  return categories;
+}
+
+export const getCategory = async (id) => {
+  const categoryQ = getDoc(doc(firebaseDb, "categories", id))
+  return categoryQ.data();
 }

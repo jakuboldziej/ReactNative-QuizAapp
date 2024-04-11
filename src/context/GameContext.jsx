@@ -1,49 +1,44 @@
-import { getQuestion } from "@utils";
+import { getCategories } from "@utils";
 import { createContext, useEffect, useState } from "react";
 
 export const GameContext = createContext();
 
 export function GameContextProvider({ children }) {
-  const [creatingGame, setCreatingGame] = useState(false);
-  const [game, setGame] = useState("asdf");
-  const [circles, setCircles] = useState(["#A49393", "#A49393", "#A49393", "#A49393"]);
+  // Global
+  const [categories, setCategories] = useState([]);
+
+  // Game
+  const [circles, setCircles] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
   const [category, setCategory] = useState(null);
   const [round, setRound] = useState(1);
 
-  const createCircles = () => {
-    let createCircles = [];
-    questions.map((question) => {
-      createCircles.push("#A49393");
-    })
-    setCircles(createCircles);
-  }
-
   useEffect(() => {
-    // createCircles();
+    const fetchData = async () => {
+      try {
+        const categoriesRes = await getCategories();
+        setCategories(categoriesRes);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    if (category) {
-      category.questions.map(async (questionId) => {
-        const questionRes = await getQuestion(questionId);
-      })
-    }
-  }, [category]);
-
   const props = {
-    game,
-    setGame,
     circles,
     setCircles,
     questions,
     setQuestions,
     category,
     setCategory,
-    creatingGame,
-    setCreatingGame,
     round,
-    setRound
+    setRound,
+    categories,
+    setCategories,
+    currentQuestion,
+    setCurrentQuestion
   }
   return (
     <GameContext.Provider value={props}>

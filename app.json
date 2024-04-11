@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "QuizApp",
-    "slug": "QuizApp",
+    "slug": "quizapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4c7536d8-c7aa-494b-9d62-1ea028a009d7"
+      }
+    },
+    "owner": "bbkubek"
   }
 }

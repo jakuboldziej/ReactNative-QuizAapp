@@ -1,23 +1,45 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useEffect } from "react";
-import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator, BackHandler } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "@constants/colors";
 import routes from "@constants/routes";
 import { GameContext } from "context/GameContext";
-import { getCategoryByName } from "@utils";
+import { getQuestion } from "@utils";
 
 function CreatingGame({ navigation, route }) {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const { startCategory } = route.params;
-  const { setCategory } = useContext(GameContext);
+  const { categories, setCategory, setQuestions, setCurrentQuestion, round, setCircles } = useContext(GameContext);
+
+  // prevent back button
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () => backHandler.remove()
+  }, [])
 
   useEffect(() => {
     const handleGameStart = async () => {
-      if (startCategory === 'Random') {
-        const categoryRes = await getCategoryByName('All');
-        setCategory(categoryRes);
-        await sleep(2000)
+      try {
+        if (startCategory === 'Random') {
+          const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+          const questionsPromise = randomCategory.questions.map(async (questionId) => {
+            const questionRes = await getQuestion(questionId);
+            return questionRes;
+          })
+          const questionsRes = await Promise.all(questionsPromise);
+          setCategory(randomCategory);
+          setQuestions(questionsRes);
+          setCurrentQuestion(questionsRes[round - 1]);
+          let createCircles = [];
+          questionsRes.map((question) => {
+            createCircles.push("#A49393");
+          })
+          setCircles(createCircles);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
         navigation.replace(routes.DisplayRoundInfo);
       }
     }

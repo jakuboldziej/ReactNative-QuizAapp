@@ -35,7 +35,7 @@ function Register({ navigation }) {
         displayName:username,
         email: email,
         uid: user.uid,
-        exp: 0
+        level: 0
       });
       navigation.navigate(routes.Drawer);
     } catch (err) {
