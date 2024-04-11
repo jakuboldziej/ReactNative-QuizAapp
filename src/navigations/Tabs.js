@@ -1,11 +1,11 @@
 import { useTheme } from "react-native-paper/src/core/theming"
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import GameMenu from "../screens/GameMenu"
-import Home from "../screens/Home"
-import Profile from "../screens/Profile";
-import colors from "../constants/colors"
-import routes from "../constants/routes";
+import GameMenu from "@screens/GameMenu"
+import Home from "@screens/Home"
+import Profile from "@screens/Profile";
+import colors from "@constants/colors"
+import routes from "@constants/routes";
 import { AntDesign } from '@expo/vector-icons';
 
 const Tab = createMaterialBottomTabNavigator()

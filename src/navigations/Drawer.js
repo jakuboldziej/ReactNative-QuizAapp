@@ -3,16 +3,18 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
-import colors from "../constants/colors";
+import colors from "@constants/colors";
 import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '@context/AuthContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Tabs from "./Tabs";
-import Settings from "../screens/Settings";
-import routes from "../constants/routes";
+import Settings from "@screens/Settings";
+import routes from "@constants/routes";
 import { useNavigation } from '@react-navigation/native';
-import { handleSignOut } from "../utils";
+import { handleSignOut } from "@utils";
 import questions from "../data.json"
+import { handleGameStart } from "@utils";
+import { GameContext } from "@context/GameContext";
 
 const Drawer = createDrawerNavigator();
 
@@ -43,20 +45,15 @@ function MyDrawer() {
 
 const DrawerCustomContent = () => {
   const { user } = useContext(AuthContext);
+  const { setGame, } = useContext(GameContext);
 
   const navigation = useNavigation();
 
-  const handleStartQuickPlay = () => {
-    let createCircles = [];
-    for(let i = 0; i < questions.length; i++) {
-      createCircles.push("#A49393");
+  const handleQuickPlay = () => {
+    const creatingGameProps = {
+      startCategory: 'Random',
     }
-    return createCircles;
-  }
-  const displayRoundParams = {
-    circles: handleStartQuickPlay(),
-    round: 1,
-    category: 'All'
+    navigation.navigate(routes.CreatingGame, creatingGameProps);
   }
 
   const insets = useSafeAreaInsets();
@@ -68,7 +65,7 @@ const DrawerCustomContent = () => {
       </View>
       <View style={style.buttonsContainer}>
         <DrawerItem label="Home" onPress={() => navigation.navigate(routes.Home)} inactiveBackgroundColor={colors.navigationColor} />
-        <DrawerItem label="Quick Play" onPress={() => navigation.navigate(routes.DisplayRoundInfo, displayRoundParams)} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label="Quick Play" onPress={handleQuickPlay} inactiveBackgroundColor={colors.navigationColor} />
       </View>
       <View style={style.additionalButtonsContainer}>
         <DrawerItem label="Settings" onPress={() => navigation.navigate(routes.Settings)} inactiveBackgroundColor={colors.navigationColor} />

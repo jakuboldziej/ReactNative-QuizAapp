@@ -1,20 +1,18 @@
 /* eslint-disable react/prop-types */
-import React from "react"
-import GameLevelCircles from "../components/GameLevelCircles"
-import Answers from "../components/Answers"
-import questions from "../data.json"
-import formatTimer from "../components/FormatTimer"
+import React, { useContext } from "react"
+import GameLevelCircles from "@components/GameLevelCircles"
+import Answers from "@components/Answers"
+import questions from "../../data.json"
 import { useState, useEffect, useRef } from "react"
 import { View, Text, StyleSheet, BackHandler } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import colors from "../constants/colors"
-import routes from "../constants/routes"
-import { updateCircles } from "../utils"
-import { useRoute } from "@react-navigation/native";
+import colors from "@constants/colors"
+import routes from "@constants/routes"
+import { formatTimer, updateCircles } from "@utils"
+import { GameContext } from "@context/GameContext"
 
 function Game({ navigation }) {
-  const route = useRoute();
-  const circles = route.params.circles;
+  const { circles } = useContext(GameContext);
   const [question, setQuestion] = useState(() => {
     return questions[0]
   })
@@ -33,10 +31,10 @@ function Game({ navigation }) {
   const [isPaused, setIsPaused] = useState(false);
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-    return () => backHandler.remove()
-  }, [])
+  // useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+  //   return () => backHandler.remove()
+  // }, [])
 
   // Timer
   useEffect(() => {
@@ -94,22 +92,14 @@ function Game({ navigation }) {
   const manageRoundState = async (updatedCircles) => {
     if(question.id < questions.length - 1) { 
       const nextQuestion = questions[question["id"] + 1];
-      navigation.navigate(routes.DisplayRoundInfo, {
-        "circles": updatedCircles,
-        "round": nextQuestion["id"] + 1,
-        "category": question['category']
-      })
+      navigation.navigate(routes.DisplayRoundInfo)
       await sleep(1999)
       setQuestion(nextQuestion)
       setButtonsDisabled(false)
-      setCorrectButtonBg(buttonBgs)
+      // setCorrectButtonBg(buttonBgs)
       toggleTimer()
     } else {
-      navigation.navigate(routes.GameEnd, {
-        "circles": updatedCircles,
-        "category": question['category'],
-        "totalTimeSpent": totalTimeSpentRef.current
-      })
+      navigation.navigate(routes.GameEnd)
     }
   }
 
@@ -119,12 +109,12 @@ function Game({ navigation }) {
   const style = styles(insets)
   return (
     <View style={style.container}>
-      <GameLevelCircles circles={circles} game={true}/>
+      <GameLevelCircles showType="game" />
       <View style={style.secondsTimer}>
         <Text>{formatTimer(totalTimeSpentRef.current)}</Text>
       </View>
       <View>
-        <Text style={[{fontSize: 25, marginVertical: 10}, style.defaultFont]}>{question["question"]}</Text>
+        <Text style={[{fontSize: 25, marginVertical: 50}, style.defaultFont]}>{question["question"]}</Text>
       </View>
       <Answers props={answerProps}/>
     </View>
@@ -147,7 +137,7 @@ const styles = (insets) =>
       flex: 1,
       position: 'absolute',
       right: 10,
-      top: 5,
+      top: 10,
     }
   })
 

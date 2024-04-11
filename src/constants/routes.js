@@ -8,5 +8,6 @@ export default {
   Login: 'Login',
   Register: 'Register',
   Settings: 'Settings',
-  Home: 'Home'
+  Home: 'Home',
+  CreatingGame: 'CreatingGame'
 }

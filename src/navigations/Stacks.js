@@ -1,14 +1,16 @@
 import React from "react";
-import Game from "../screens/Game";
+import Game from "@screens/Game/Game";
 import Drawer from "./Drawer";
-import Profile from "../screens/Profile";
-import GameEnd from "../screens/GameEnd";
-import DisplayRoundInfo from "../screens/DisplayRoundInfo";
+import Profile from "@screens/Profile";
+import GameEnd from "@screens/Game/GameEnd";
+import DisplayRoundInfo from "@screens/Game/DisplayRoundInfo";
+import CreatingGame from "@screens/Game/CreatingGame";
 import { createStackNavigator } from "@react-navigation/stack";
-import Rules from "../screens/Rules";
-import Login from "../screens/auth/Login";
-import Register from "../screens/auth/Register";
-import routes from "../constants/routes";
+import Rules from "@screens/Rules";
+import Login from "@screens/auth/Login";
+import Register from "@screens/auth/Register";
+import routes from "@constants/routes";
+import colors from "@constants/colors";
 
 const Stack = createStackNavigator();
 function Stacks() {
@@ -20,6 +22,7 @@ function Stacks() {
       <Stack.Screen name={routes.Game} component={Game} />
       <Stack.Screen name={routes.GameEnd} component={GameEnd} />
       <Stack.Screen name={routes.DisplayRoundInfo} component={DisplayRoundInfo} />
+      <Stack.Screen name={routes.CreatingGame} component={CreatingGame} />
       <Stack.Screen name={routes.Profile} component={Profile} />
       <Stack.Screen name={routes.Rules} component={Rules} />
       {/* Auth */}

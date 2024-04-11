@@ -3,8 +3,8 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import colors from "../constants/colors";
-import { AuthContext } from "../context/AuthContext";
+import colors from "@constants/colors";
+import { AuthContext } from "@context/AuthContext";
 
 function Profile({ navigation }) {
   const [inputValue, setInputValue] = useState('');

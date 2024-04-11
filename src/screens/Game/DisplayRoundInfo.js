@@ -1,22 +1,19 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import GameLevelCircles from "../components/GameLevelCircles";
+import React, { useContext } from "react";
+import GameLevelCircles from "@components/GameLevelCircles";
 import { View, StyleSheet, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import colors from "../constants/colors";
-import routes from "../constants/routes";
+import colors from "@constants/colors";
+import routes from "@constants/routes";
+import { GameContext } from "context/GameContext";
 
-function DisplayRoundInfo({ navigation, route }) {
+function DisplayRoundInfo({ navigation }) {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-  let { circles, round, category } = route.params
+  const { round, circles, category } = useContext(GameContext);
 
   const manageTime = async () => {
     await sleep(2000)
-    if (round === 1) {
-      navigation.replace(routes.Game, {circles: circles});
-    } else {
-      navigation.goBack()
-    }
+    navigation.replace(routes.Game);
   }
 
   manageTime();
@@ -26,8 +23,8 @@ function DisplayRoundInfo({ navigation, route }) {
   return (
     <View style={style.container}>
       <Text style={{ fontSize: 25 }}>Round {round}</Text>
-      <GameLevelCircles circles={circles} game={false} />
-      <Text style={{ fontSize: 25, marginBottom: 5 }}>{category}</Text>
+      <GameLevelCircles showType="DRI" />
+      <Text style={{ fontSize: 25, marginBottom: 5 }}>{category.name}</Text>
     </View>
   )
 }

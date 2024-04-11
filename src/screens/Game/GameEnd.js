@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from "react"
-import Button from "../components/MyButton"
-import GameLevelCirles from "../components/GameLevelCircles"
+import Button from "@components/MyButton"
+import GameLevelCirles from "@components/GameLevelCircles"
 import { View, StyleSheet, Text } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
-import colors from "../constants/colors"
-import routes from "../constants/routes"
-import questions from "../data.json";
+import colors from "@constants/colors"
+import routes from "@constants/routes"
+import questions from "../../data.json";
 
 function GameEnd({ navigation, route }) {
   let answersCorrect = 0;

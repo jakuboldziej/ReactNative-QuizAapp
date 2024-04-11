@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "@components": ["./components"],
+        "@utils": ["./utils.js"],
+        "@constants": ["./constants"],
+        "@context": ["./context"],
+        "@navigations": ["./navigations"],
+        "@screens": ["./screens"],
+      }
+  }
+}

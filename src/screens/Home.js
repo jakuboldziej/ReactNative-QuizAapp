@@ -2,8 +2,8 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import colors from "../constants/colors";
-import HomeCategories from '../components/HomeCategories';
+import colors from "@constants/colors";
+import HomeCategories from '@components/HomeCategories';
 
 function Home({ navigation }) {
   const displayRoundParams = {
