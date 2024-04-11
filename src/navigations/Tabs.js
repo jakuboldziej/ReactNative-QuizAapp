@@ -2,8 +2,7 @@ import { useTheme } from "react-native-paper/src/core/theming"
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import GameMenu from "../screens/GameMenu"
-import MainMenu from "../screens/MainMenu"
-import Settings from "../screens/Settings"
+import Home from "../screens/Home"
 import Profile from "../screens/Profile";
 import colors from "../constants/colors"
 import routes from "../constants/routes";
@@ -16,7 +15,7 @@ function Tabs({ setActiveTab }) {
   theme.colors.secondaryContainer = "transperent"
 
   return (
-    <Tab.Navigator shifting={true} initialRouteName="MainMenu" activeColor="#e91e63" barStyle={{backgroundColor: colors.navigationColor, height: 80}}>
+    <Tab.Navigator shifting={true} initialRouteName={routes.Home} activeColor="#e91e63" barStyle={{backgroundColor: colors.navigationColor, height: 80}}>
       <Tab.Screen name='Play' component={GameMenu} options={{
         tabBarLabel: 'Play',
         tabBarIcon: ({focused}) => (
@@ -24,8 +23,8 @@ function Tabs({ setActiveTab }) {
         )
       }}
       listeners={({route}) => ({state: () => setActiveTab(route.name)})}/>
-      <Tab.Screen name='MainMenu' component={MainMenu} options={{
-        tabBarLabel: 'MainMenu',
+      <Tab.Screen name={routes.Home} component={Home} options={{
+        tabBarLabel: routes.Home,
         tabBarIcon: ({focused}) => (
           <MaterialIcons name='menu-book' size={25} color={focused ? '#e91e63' : 'black'}/>
         )

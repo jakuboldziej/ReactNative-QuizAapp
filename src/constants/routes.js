@@ -1,7 +1,6 @@
 export default {
   Drawer: 'Drawer',
   Game: 'Game',
-  GameCategories: 'GameCategories',
   GameEnd: 'GameEnd ',
   DisplayRoundInfo: 'DisplayRoundInfo',
   Profile: 'Profile',
@@ -9,5 +8,5 @@ export default {
   Login: 'Login',
   Register: 'Register',
   Settings: 'Settings',
-  Profile: 'Profile'
+  Home: 'Home'
 }

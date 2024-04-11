@@ -51,10 +51,10 @@ function Register({ navigation }) {
   return (
     <View style={style.container}>
       <Text>Register</Text>
-      <TextInput value={username} style={style.input} placeholder='Username' autoCapitalize='none' onChangeText={(text) => setUsername(text)}></TextInput>
-      <TextInput value={email} style={style.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
-      <TextInput secureTextEntry={true} value={password} style={style.input} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
-      <TextInput secureTextEntry={true} value={passwordVerify} style={style.input} placeholder='Verify Password' autoCapitalize='none' onChangeText={(text) => setPasswordVerify(text)}></TextInput>
+      <TextInput textContentType='nickname' value={username} style={style.input} placeholder='Username' autoCapitalize='none' onChangeText={(text) => setUsername(text)}></TextInput>
+      <TextInput textContentType='emailAddress' value={email} style={style.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
+      <TextInput textContentType='password' secureTextEntry={true} value={password} style={style.input} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+      <TextInput textContentType='password' secureTextEntry={true} value={passwordVerify} style={style.input} placeholder='Verify Password' autoCapitalize='none' onChangeText={(text) => setPasswordVerify(text)}></TextInput>
       
       {loading ? <ActivityIndicator size="large" color="#0000ff" />
       : <Button title='Register' onPress={signUp}/>}

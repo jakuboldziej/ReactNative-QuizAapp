@@ -34,6 +34,7 @@ function Answers({ props }) {
   return (
     <View style={style.answers}>
       <Progress.Bar borderColor="transparent" unfilledColor="#A49393" color="yellow" borderRadius={0} width={safeArea().width - 20} progress={progress} animated={true}/>
+      {/* for buttons */}
       <Button title={question['answers'][0]} type="answer" props={{
         buttonsDisabled: buttonsDisabled, onPress: () => manageCorrectAnswer(0), 
         optionalStyle: {backgroundColor: correctButtonBg[0]},

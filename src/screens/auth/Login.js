@@ -39,8 +39,8 @@ function Login({ navigation }) {
   return (
     <View style={style.container}>
       <Text>Login</Text>
-      <TextInput value={email} style={style.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
-      <TextInput secureTextEntry={true} value={password} style={style.input} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+      <TextInput textContentType='emailAddress' value={email} style={style.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
+      <TextInput textContentType='password' secureTextEntry={true} value={password} style={style.input} placeholder='Password' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
       
       {loading ? <ActivityIndicator size="large" color="#0000ff" />
       : <Button title='Login' onPress={signIn}/>}

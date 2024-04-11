@@ -1,46 +1,42 @@
 /* eslint-disable react/prop-types */
 import React from "react"
-import GameLevelCirles from "../components/GameLevelCircles"
+import GameLevelCircles from "../components/GameLevelCircles"
 import Answers from "../components/Answers"
 import questions from "../data.json"
 import formatTimer from "../components/FormatTimer"
 import { useState, useEffect, useRef } from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, BackHandler } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import colors from "../constants/colors"
 import routes from "../constants/routes"
-
-const buttonBgs = {
-  "0": "#A49393",
-  "1": "#A49393",
-  "2": "#A49393",
-  "3": "#A49393"
-}
-
-let circleBGG = {}
-Object.keys(questions).forEach((i) => {
-  circleBGG[i.toString()] = "#A49393"
-})
+import { updateCircles } from "../utils"
+import { useRoute } from "@react-navigation/native";
 
 function Game({ navigation }) {
+  const route = useRoute();
+  const circles = route.params.circles;
   const [question, setQuestion] = useState(() => {
     return questions[0]
   })
-  const [correctButtonBg, setCorrectButtonBg] = useState(buttonBgs)
-  const [circleBg, setCircleBg] = useState(circleBGG)
-  const [buttonsDisabled, setButtonsDisabled] = useState(false)
-  const initialTime = 15
-  const timeIncre = 1
-  const [time, setTime] = useState(initialTime)
-  const totalTimeSpentRef = useRef(0)
-  const [progress, setProgress] = useState(1)
-  const [isPaused, setIsPaused] = useState(false)
-  const sleep = ms => new Promise(r => setTimeout(r, ms))
+  const [correctButtonBg, setCorrectButtonBg] = useState({
+    "0": "#A49393",
+    "1": "#A49393",
+    "2": "#A49393",
+    "3": "#A49393"
+  });
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const initialTime = 15;
+  const timeIncre = 1;
+  const [time, setTime] = useState(initialTime);
+  const totalTimeSpentRef = useRef(0);
+  const [progress, setProgress] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
   
-  // useEffect(() => {
-  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-  //   return () => backHandler.remove()
-  // }, [])
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () => backHandler.remove()
+  }, [])
 
   // Timer
   useEffect(() => {
@@ -77,38 +73,29 @@ function Game({ navigation }) {
         ...correctButtonBg, 
         [buttonId]: "green"
       })
-      setCircleBg({
-        ...circleBg, 
-        [question['id']]: "green"
-      })
+      const updatedCircles = updateCircles(circles, 'green', buttonId);
 
       await sleep(2000)
-      await manageRoundState("green")
+      await manageRoundState(updatedCircles)
     } else {
       setCorrectButtonBg({
         ...correctButtonBg, 
         [buttonId]: "red",
         [correctAnswer]: "green"
       })
-      setCircleBg({
-        ...circleBg, 
-        [question['id']]: "red"
-      })
+      const updatedCircles = updateCircles(circles, 'red', buttonId);
 
       await sleep(2000)
-      await manageRoundState("red")
+      await manageRoundState(updatedCircles)
     }
     return
   }
 
-  const manageRoundState = async (color) => {
+  const manageRoundState = async (updatedCircles) => {
     if(question.id < questions.length - 1) { 
-      const nextQuestion = questions[question["id"] + 1]
+      const nextQuestion = questions[question["id"] + 1];
       navigation.navigate(routes.DisplayRoundInfo, {
-        "circleBg": {
-          ...circleBg, 
-          [question['id']]: color
-        },
+        "circles": updatedCircles,
         "round": nextQuestion["id"] + 1,
         "category": question['category']
       })
@@ -119,23 +106,20 @@ function Game({ navigation }) {
       toggleTimer()
     } else {
       navigation.navigate(routes.GameEnd, {
-        "circleBg": {
-          ...circleBg, 
-          [question['id']]: color
-        },
+        "circles": updatedCircles,
         "category": question['category'],
         "totalTimeSpent": totalTimeSpentRef.current
       })
     }
   }
 
-  const answerProps = {buttonsDisabled, correctButtonBg, question, progress, manageCorrectAnswer}
+  const answerProps = { buttonsDisabled, correctButtonBg, question, progress, manageCorrectAnswer }
 
   const insets = useSafeAreaInsets()
   const style = styles(insets)
   return (
     <View style={style.container}>
-      <GameLevelCirles circleBg={circleBg} game={true}/>
+      <GameLevelCircles circles={circles} game={true}/>
       <View style={style.secondsTimer}>
         <Text>{formatTimer(totalTimeSpentRef.current)}</Text>
       </View>

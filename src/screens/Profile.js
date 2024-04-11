@@ -14,7 +14,7 @@ function Profile({ navigation }) {
   const style = styles(insets);
   return (
     <View style={style.container}>
-      <Text>{user.displayName}</Text>
+      <Text>{user?.displayName}</Text>
       <TextInput style={{
         padding: 10,
         borderColor: 'red',

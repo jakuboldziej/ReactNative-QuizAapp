@@ -2,7 +2,6 @@ import React from "react";
 import Game from "../screens/Game";
 import Drawer from "./Drawer";
 import Profile from "../screens/Profile";
-import GameCategories from "../screens/GameCategories";
 import GameEnd from "../screens/GameEnd";
 import DisplayRoundInfo from "../screens/DisplayRoundInfo";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -19,7 +18,6 @@ function Stacks() {
       <Stack.Screen name={routes.Drawer} component={Drawer} />
       {/* Game */}
       <Stack.Screen name={routes.Game} component={Game} />
-      <Stack.Screen name={routes.GameCategories} component={GameCategories} />
       <Stack.Screen name={routes.GameEnd} component={GameEnd} />
       <Stack.Screen name={routes.DisplayRoundInfo} component={DisplayRoundInfo} />
       <Stack.Screen name={routes.Profile} component={Profile} />

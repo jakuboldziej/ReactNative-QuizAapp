@@ -6,6 +6,7 @@ import { View, StyleSheet, Text } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
 import colors from "../constants/colors"
 import routes from "../constants/routes"
+import questions from "../data.json";
 
 function GameEnd({ navigation, route }) {
   let answersCorrect = 0;
@@ -64,7 +65,7 @@ function GameEnd({ navigation, route }) {
       </View>
       <View style={style.pointsContainer}>
         <Text style={style.defaultFont}>Points Summary</Text>
-        <GameLevelCirles circleBg={circleBg} game={false}/>
+        <GameLevelCirles questionsLength={questions.length} game={false}/>
         <View style={{flexDirection: 'row', gap: 10}}>
           <View>
             <Text style={{textAlign: 'center'}}>Answers</Text>

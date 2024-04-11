@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Profile from "../screens/Profile";
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import colors from "../constants/colors";
@@ -10,6 +9,10 @@ import { AuthContext } from '../context/AuthContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Tabs from "./Tabs";
 import Settings from "../screens/Settings";
+import routes from "../constants/routes";
+import { useNavigation } from '@react-navigation/native';
+import { handleSignOut } from "../utils";
+import questions from "../data.json"
 
 const Drawer = createDrawerNavigator();
 
@@ -22,8 +25,10 @@ function MyDrawer() {
       backgroundColor: colors.mainBackgroundColor
     },
     headerTitle: '',
+
     headerStyle: {
-      backgroundColor: colors.navigationColor
+      backgroundColor: colors.navigationColor,
+      height: 90,
     },
     headerRight: () => <CustomHeaderComponent search={search} setSearch={setSearch} activeTab={activeTab} />,
 
@@ -36,19 +41,39 @@ function MyDrawer() {
   );
 }
 
-const DrawerCustomContent = ({ props }) => {
+const DrawerCustomContent = () => {
   const { user } = useContext(AuthContext);
+
+  const navigation = useNavigation();
+
+  const handleStartQuickPlay = () => {
+    let createCircles = [];
+    for(let i = 0; i < questions.length; i++) {
+      createCircles.push("#A49393");
+    }
+    return createCircles;
+  }
+  const displayRoundParams = {
+    circles: handleStartQuickPlay(),
+    round: 1,
+    category: 'All'
+  }
 
   const insets = useSafeAreaInsets();
   const style = CustomContentStyles(insets);
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView>
       <View style={style.usernameContainer}>
         <Text style={style.username}>{user?.displayName}</Text>
       </View>
       <View style={style.buttonsContainer}>
-        <DrawerItem label="Dashboard" onPress={() => { }} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label="Home" onPress={() => navigation.navigate(routes.Home)} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label="Quick Play" onPress={() => navigation.navigate(routes.DisplayRoundInfo, displayRoundParams)} inactiveBackgroundColor={colors.navigationColor} />
+      </View>
+      <View style={style.additionalButtonsContainer}>
+        <DrawerItem label="Settings" onPress={() => navigation.navigate(routes.Settings)} inactiveBackgroundColor={colors.navigationColor} />
         <DrawerItem label="Help" onPress={() => { }} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label="Log Out" onPress={async () => await handleSignOut(navigation)} inactiveBackgroundColor={colors.navigationColor} />
       </View>
     </DrawerContentScrollView>
   );
@@ -62,7 +87,12 @@ export const CustomContentStyles = (insets) => StyleSheet.create({
     padding: 15
   },
   buttonsContainer: {
-    paddingTop: 15
+    paddingVertical: 15,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
+  },
+  additionalButtonsContainer: {
+    paddingVertical: 15,
   }
 })
 
@@ -72,7 +102,7 @@ function CustomHeaderComponent({ search, setSearch, activeTab }) {
   switch (activeTab) {
     case 'Play':
       return;
-    case 'MainMenu':
+    case routes.Home:
       return (
         <>
           {search ? (
@@ -86,7 +116,7 @@ function CustomHeaderComponent({ search, setSearch, activeTab }) {
           )}
         </>
       );
-    case 'Profile':
+    case routes.Profile:
       return (
         <MaterialCommunityIcons name="dots-vertical" style={{ paddingRight: 10 }} size={24} />
       );
