@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { GameContext } from "@context/GameContext";
+import { GameContext } from "context/GameContext";
 import { AuthContext } from "context/AuthContext";
 
 function GameLevelCircles({ showType }) {

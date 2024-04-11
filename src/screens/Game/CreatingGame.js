@@ -2,10 +2,10 @@
 import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, Text, ActivityIndicator, BackHandler } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import colors from "@constants/colors";
-import routes from "@constants/routes";
+import colors from "constants/colors";
+import routes from "constants/routes";
 import { GameContext } from "context/GameContext";
-import { getQuestion } from "@utils";
+import { getQuestion } from "utils";
 
 function CreatingGame({ navigation, route }) {
   const sleep = ms => new Promise(r => setTimeout(r, ms));

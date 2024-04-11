@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useEffect, useState } from "react"
-import Button from "@components/MyButton"
-import GameLevelCircles from "@components/GameLevelCircles"
+import Button from "components/MyButton"
+import GameLevelCircles from "components/GameLevelCircles"
 import { View, StyleSheet, Text, BackHandler } from "react-native"
 import { useSafeAreaInsets, useSafeAreaFrame as safeArea } from "react-native-safe-area-context"
-import colors from "@constants/colors"
-import routes from "@constants/routes"
+import colors from "constants/colors"
+import routes from "constants/routes"
 import { GameContext } from "context/GameContext"
 import { useIsFocused } from "@react-navigation/native";
 import { AuthContext } from "context/AuthContext"

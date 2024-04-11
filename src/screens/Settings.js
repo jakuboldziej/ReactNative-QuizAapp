@@ -2,8 +2,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Text, View, Button, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import colors from "@constants/colors";
-import routes from "@constants/routes";
+import colors from "constants/colors";
+import routes from "constants/routes";
 
 function Settings({navigation}) {
 

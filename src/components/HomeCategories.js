@@ -1,28 +1,20 @@
 /* eslint-disable react/prop-types */
-import React from "react"
-import { View, StyleSheet, Text } from "react-native"
+import { GameContext } from "context/GameContext";
+import React, { useContext } from "react"
+import { View, StyleSheet, Text, Image } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 function HomeCategories() {
+  const { categories } = useContext(GameContext);
+
   const insets = useSafeAreaInsets()
   const style = styles(insets)
-
-  const categories = [{
-    uid: 0,
-    name: "aaaa",
-    questions: [{id: 0}]
-  },
-  {
-    uid: 1,
-    name: "bbbb",
-    questions: [{id: 0}]
-  }]
-
   return (
     <View style={style.categories}>
       {categories.map((category) => (
-        <View key={category.uid} style={style.category}>
-          <Text>{category.name}</Text>
+        <View key={category.name} style={style.category}>
+          <Image source={require('../../assets/icon.png')} style={{ width: 100, height: 100 }} />
+          <Text style={style.categoryName}>{category.name}</Text>
         </View>
       ))}
     </View>
@@ -32,14 +24,23 @@ function HomeCategories() {
 const styles = (insets) =>
   StyleSheet.create({
     categories: {
-
+      width: "100%",
+      flexDirection: 'row',
+      gap: 20,
+      justifyContent: 'center'
     },
-    category: {
+    categoryName: {
       width: 100,
-      height: 20,
       borderColor: "white",
       borderWidth: 1,
-      color: 'black'
+      borderRadius: 22,
+      backgroundColor: 'white',
+      textAlign: 'center'
+    },
+    category: {
+      color: 'black',
+      padding: 3,
+      gap: 10
     }
   })
 

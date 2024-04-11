@@ -5,8 +5,8 @@ import { getAuth, updateProfile } from 'firebase/auth';
 import { firebaseApp, firebaseDb } from '../../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import colors from "@constants/colors";
-import routes from '@constants/routes';
+import colors from "constants/colors";
+import routes from 'constants/routes';
 
 function Register({ navigation }) {
   const [email, setEmail] = useState('');
@@ -35,7 +35,8 @@ function Register({ navigation }) {
         displayName:username,
         email: email,
         uid: user.uid,
-        level: 0
+        level: 0,
+        gamesPlayed: 0,
       });
       navigation.navigate(routes.Drawer);
     } catch (err) {

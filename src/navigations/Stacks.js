@@ -1,19 +1,21 @@
-import React from "react";
-import Game from "@screens/Game/Game";
-import Drawer from "./Drawer";
-import Profile from "@screens/Profile";
-import GameEnd from "@screens/Game/GameEnd";
-import DisplayRoundInfo from "@screens/Game/DisplayRoundInfo";
-import CreatingGame from "@screens/Game/CreatingGame";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Rules from "@screens/Rules";
-import Login from "@screens/auth/Login";
-import Register from "@screens/auth/Register";
-import routes from "@constants/routes";
-import colors from "@constants/colors";
+import Game from "screens/Game/Game";
+import Drawer from "./Drawer";
+import Profile from "screens/Profile";
+import GameEnd from "screens/Game/GameEnd";
+import DisplayRoundInfo from "screens/Game/DisplayRoundInfo";
+import CreatingGame from "screens/Game/CreatingGame";
+import Rules from "screens/Rules";
+import Login from "screens/auth/Login";
+import Register from "screens/auth/Register";
+import routes from "constants/routes";
+import { AuthContext } from "context/AuthContext";
 
 const Stack = createStackNavigator();
+
 function Stacks() {
+  const { user } = useContext(AuthContext);
 
   return (
     <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>

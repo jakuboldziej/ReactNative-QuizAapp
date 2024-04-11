@@ -4,9 +4,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getAuth } from 'firebase/auth';
 import { firebaseApp } from '../../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { AuthContext } from '@context/AuthContext';
-import colors from "@constants/colors";
-import routes from '@constants/routes';
+import { AuthContext } from 'context/AuthContext';
+import colors from "constants/colors";
+import routes from 'constants/routes';
 
 function Login({ navigation }) {
   const [email, setEmail] = useState('');

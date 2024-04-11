@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { FontAwesome } from '@expo/vector-icons';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
-import colors from "@constants/colors";
+import colors from "constants/colors";
 import { useContext } from 'react';
-import { AuthContext } from '@context/AuthContext';
+import { AuthContext } from 'context/AuthContext';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Tabs from "./Tabs";
-import Settings from "@screens/Settings";
-import routes from "@constants/routes";
-import { handleSignOut } from "@utils";
+import Settings from "screens/Settings";
+import routes from "constants/routes";
+import { handleSignOut } from "utils";
 import { useNavigation } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
 
@@ -25,7 +26,6 @@ function MyDrawer() {
       backgroundColor: colors.mainBackgroundColor
     },
     headerTitle: '',
-
     headerStyle: {
       backgroundColor: colors.navigationColor,
       height: 90,
@@ -62,13 +62,25 @@ const DrawerCustomContent = () => {
         <Text style={style.username}>{user?.displayName}</Text>
       </View>
       <View style={style.buttonsContainer}>
-        <DrawerItem label="Home" onPress={() => navigation.navigate(routes.Home)} inactiveBackgroundColor={colors.navigationColor} />
-        <DrawerItem label="Quick Play" onPress={handleQuickPlay} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label={() => (
+          <CustomDrawerLabel label={routes.Home} icon={<MaterialIcons name="home" size={20} color="black" />} />
+        )}
+          onPress={() => navigation.navigate(routes.Home)} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label={() => (
+          <CustomDrawerLabel label="Quick Play" icon={<MaterialIcons name="play-circle-outline" size={20} color="black" />} />
+        )}
+          onPress={handleQuickPlay} inactiveBackgroundColor={colors.navigationColor} />
       </View>
       <View style={style.additionalButtonsContainer}>
-        <DrawerItem label="Settings" onPress={() => navigation.navigate(routes.Settings)} inactiveBackgroundColor={colors.navigationColor} />
-        <DrawerItem label="Help" onPress={() => { }} inactiveBackgroundColor={colors.navigationColor} />
-        <DrawerItem label="Log Out" onPress={async () => await handleSignOut(navigation)} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label={() => (
+          <CustomDrawerLabel label={routes.Settings} icon={<FontAwesome name="gear" size={20} color="black" />} />
+        )} onPress={() => navigation.navigate(routes.Settings)} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem  label={() => (
+          <CustomDrawerLabel label="Help" icon={<MaterialIcons name="help-outline" size={20} color="black" />} />
+        )} onPress={() => { }} inactiveBackgroundColor={colors.navigationColor} />
+        <DrawerItem label={() => (
+          <CustomDrawerLabel label="Log Out" icon={<MaterialCommunityIcons name="logout" size={20} color="black" />} />
+        )}  onPress={async () => await handleSignOut(navigation)} inactiveBackgroundColor={colors.navigationColor} />
       </View>
     </DrawerContentScrollView>
   );
@@ -88,8 +100,24 @@ export const CustomContentStyles = (insets) => StyleSheet.create({
   },
   additionalButtonsContainer: {
     paddingVertical: 15,
+  },
+  drawerButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8
   }
 })
+
+function CustomDrawerLabel({ label, icon }) {
+  const insets = useSafeAreaInsets();
+  const style = CustomContentStyles(insets);
+  return (
+    <View style={style.drawerButton}>
+      {icon}
+      <Text>{label}</Text>
+    </View>
+  )
+}
 
 function CustomHeaderComponent({ search, setSearch, activeTab }) {
   const [searchInput, setSearchInput] = useState('');

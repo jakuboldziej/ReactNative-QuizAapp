@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { View, Text, Button, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import colors from "../constants/colors";
+import colors from "constants/colors";
 
 function Rules({ navigation }) {
   const insets = useSafeAreaInsets();

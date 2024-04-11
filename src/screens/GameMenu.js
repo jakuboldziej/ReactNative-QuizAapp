@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import Button from "@components/MyButton";
+import Button from "components/MyButton";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StyleSheet, View, Text } from "react-native";
-import colors from "@constants/colors";
+import colors from "constants/colors";
 
 function GameMenu({ navigation }) {
   const insets = useSafeAreaInsets();

@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useEffect } from "react";
-import GameLevelCircles from "@components/GameLevelCircles";
+import GameLevelCircles from "components/GameLevelCircles";
 import { View, StyleSheet, Text, BackHandler } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import colors from "@constants/colors";
-import routes from "@constants/routes";
+import colors from "constants/colors";
+import routes from "constants/routes";
 import { GameContext } from "context/GameContext";
 
 function DisplayRoundInfo({ navigation }) {
