@@ -12,7 +12,7 @@ function CreatingGame({ navigation, route }) {
   const { startCategory } = route.params;
   const { categories, setCategory, setQuestions, setCurrentQuestion, round, setCircles } = useContext(GameContext);
 
-  // prevent back button
+  // prevent back button on android
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
     return () => backHandler.remove()
